@@ -21,7 +21,7 @@ body[data-theme="crimson"]{
   --accent:#ed2553;--accent-2:#f15478;--on-accent:#fff;
   --btn:#4d4d4d;--btn-hover:#5e5e5e;--btn-text:#fff;
   --tag:#4d4d4d;--tag-hover:#5e5e5e;--tag-text:#fff;--tag-count:#333;--tag-count-text:#bdbdbd;
-  --field:#1a1a1a;--search:#fff;--search-text:#111;
+  --field:#1a1a1a;--search:#333;--search-text:#eee;
   --radius:4px;--card-radius:0px;--thumb-ratio:7/10;--card-min:200px;--gap:12px;
   --shadow:0 10px 40px rgba(0,0,0,.6);--toast:#3a3a3a;
 }
@@ -276,6 +276,13 @@ body[data-theme="crimson"] .info h1,body[data-theme="crimson"] .info .orig{text-
 .row .val{flex:1;min-width:0;padding-top:3px}
 .row .val:has(.tag){padding-top:0}
 .actions-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+/* Favorite stays a calm button (the heart turns red); Delete sits apart, outlined, so the two can't be mixed up */
+.btn.fav-btn.on,.btn.fav-btn.on:hover:not(:disabled){background:var(--btn);color:var(--btn-text)}
+.btn.fav-btn.on svg{color:var(--accent)}
+.danger-row{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.btn.danger-soft{background:transparent;color:#ff5a6e;border:1px solid rgba(255,90,110,.45)}
+.btn.danger-soft:hover:not(:disabled){background:rgba(255,90,110,.12)}
+body[data-theme="azure"] .btn.danger-soft{color:#c62a3c;border-color:rgba(198,42,60,.45)}
 @media (max-width:600px){.info{padding:16px}.row .lbl{width:74px}.arrow{width:38px;height:56px}}
 
 /* ---------- empty states ---------- */
@@ -440,6 +447,10 @@ input[type="range"]{accent-color:var(--accent);flex:1;min-width:120px}
 /* doujinshi list */
 .dchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:-6px 0 12px;padding-bottom:2px}
 .dchips::-webkit-scrollbar{display:none}
+/* rows that slide sideways fade at the edge where more is hidden (edgeFade sets the classes) */
+.fade-r{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 64px),transparent)}
+.fade-l{-webkit-mask-image:linear-gradient(to left,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(to left,#000 calc(100% - 64px),transparent)}
+.fade-l.fade-r{-webkit-mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 64px),transparent);mask-image:linear-gradient(to right,transparent,#000 40px,#000 calc(100% - 64px),transparent)}
 .dchips a{flex:none;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line);display:inline-flex;align-items:center;font-size:13px;font-weight:700;color:var(--text);text-decoration:none}
 .dchips a.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .vt{display:inline-flex;padding:3px;border-radius:11px;background:var(--panel)}
@@ -529,6 +540,9 @@ body:not([data-theme="azure"]) .item-page .tag[data-ns=""] .n,body:not([data-the
   .tabbar .tb-add{width:56px;height:56px;margin:0 4px;background:var(--accent);color:var(--on-accent)}
   .tabbar .tb-add svg{width:26px;height:26px}
   body.selecting .tabbar,body.lb-open .tabbar{display:none}
+  /* the item page is a sheet with its own Back button; the floating bar only covered its tags */
+  body.on-item .tabbar{display:none}
+  body.on-item #toasts{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
   .links a[data-v="doujinshi"],.links a[data-v="albums"],.links a[data-v="explore"]{display:none}
   body.on-explore .topbar .search,body.on-explore .topbar .links{display:none}
   main{padding-bottom:120px}
@@ -563,6 +577,15 @@ body:not([data-theme="azure"]) .item-page .tag[data-ns=""] .n,body:not([data-the
   .tools-tg{display:inline-flex;margin-left:auto;position:relative;width:40px;padding:0}
   .page-head.open .tools-tg{background:var(--panel2)}
   .tools-tg .dot{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  /* the ⋯ button and what it opens match the rounded Newest / Filters buttons of the library */
+  .btn.tools-tg{width:40px;height:40px;border-radius:50%;background:var(--panel);color:var(--strong)}
+  .page-head .tools .btn,.page-head .tools .ctl{height:36px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text);font-size:13px;font-weight:700}
+  .page-head .tools .btn:hover:not(:disabled){background:var(--panel)}
+  .page-head .tools .btn.on,.page-head .tools .btn.primary{border-color:var(--accent);color:var(--accent);background:transparent}
+  .page-head .tools .btn.danger{border-color:rgba(255,90,110,.45);color:#ff5a6e;background:transparent}
+  .page-head .tools select.ctl{-webkit-appearance:none;appearance:none;padding-right:34px;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8c8c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/14px}
+  .page-head .tools .seg{border-radius:999px;background:transparent}
+  .page-head .tools .seg a,.page-head .tools .seg button{border-radius:999px}
 }
 /* settings in four tabs */
 .set-tabs{position:sticky;top:0;z-index:2;margin:-6px -22px 16px;padding:8px 22px 10px;background:var(--panel)}
@@ -674,7 +697,7 @@ button.card{border:0;background:none;padding:0;margin:0;text-align:left;color:in
 .la-scan .progress{margin:18px 0 10px}
 .toast.act{pointer-events:auto;display:flex;align-items:center;gap:16px}
 .toast.act button{border:0;background:none;color:var(--accent);font-weight:800;font-size:14px;padding:4px 2px;cursor:pointer}
-@media (hover:none){.lb-arrow{display:none}}
+@media (hover:none),(pointer:coarse){.lb-arrow{display:none}}
 #lb.chrome-off .lb-top,#lb.chrome-off .lb-arrow{opacity:0;pointer-events:none}
 .lb-msg{position:absolute;inset:0;display:grid;place-items:center;color:#aaa;pointer-events:none;padding:24px;text-align:center}
 .lb-burst{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;color:#ff4060;pointer-events:none;opacity:0;z-index:4;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))}
@@ -1750,6 +1773,7 @@ function render(opts = {}) {
     default: location.replace('#/'); return;
   }
   window.scrollTo(0, curMem && (opts.keep || view !== 'item') ? curMem.y : 0);
+  requestAnimationFrame(edgeFades);
 }
 
 /* ================= views ================= */
@@ -1760,6 +1784,15 @@ function setSearchOpen(open) {
   $('#searchTg')?.setAttribute('aria-expanded', String(!!open));
   if (open) document.body.classList.remove('bar-hide');
 }
+// Rows of buttons that slide sideways fade at the edge where more is hidden, so it's clear they slide.
+const FADE_ROWS = '.dchips, .ex-sites', FADE_SLACK = 2; // px: ignore rounding at the ends
+function edgeFade(el) {
+  const left = el.scrollLeft > FADE_SLACK, right = el.scrollLeft + el.clientWidth < el.scrollWidth - FADE_SLACK;
+  el.classList.toggle('fade-l', left); el.classList.toggle('fade-r', right);
+}
+function edgeFades() { $$(FADE_ROWS).forEach(edgeFade); }
+document.addEventListener('scroll', e => { if (e.target instanceof Element && e.target.matches(FADE_ROWS)) edgeFade(e.target); }, true);
+window.addEventListener('resize', edgeFades);
 // On phones the tools fold into a ⋯ button; `active` puts a dot on it (filters in use).
 function headHTML(title, count, tools = '', active = false) {
   const tg = tools ? `<button type="button" class="btn tools-tg" data-tg aria-label="Sort, filters and more" aria-expanded="false">${I.dots}${active ? '<span class="dot"></span>' : ''}</button>` : '';
@@ -2253,13 +2286,13 @@ async function itemView(id, token, opts) {
       </div>
       <div class="rows">${rows}</div>
       <div class="actions-row">
-        <button class="btn primary${it.fav ? ' on' : ''}" data-act="fav">${I.heart}<span>${it.fav ? 'Favorited' : 'Favorite'}</span></button>
+        <button class="btn fav-btn${it.fav ? ' on' : ''}" data-act="fav">${I.heart}<span>${it.fav ? 'Favorited' : 'Favorite'}</span></button>
         ${reading ? '<button class="btn ghost" data-act="readstart">Read from the start</button>' : ''}
         ${it.type === 'video' ? `<button class="btn" data-act="setthumb">${I.image}Use this frame as thumbnail</button>` : ''}
         ${it.type !== 'video' ? `<button class="btn" data-act="setbg">${I.image}Set as background</button>` : ''}
         ${isPost ? `<button class="btn" data-act="split">${I.split}Split into separate items</button>` : ''}
-        <button class="btn danger" data-act="delete">${I.trash}${isPost ? 'Delete post' : 'Delete'}</button>
       </div>
+      <div class="danger-row"><button class="btn danger-soft" data-act="delete">${I.trash}${isPost ? 'Delete post' : 'Delete'}</button></div>
     </div>
     ${isPost ? `<button class="btn see-all" id="seeAll" type="button">${I.pages}Show all ${it.pages.length} pages</button><div class="reader" id="reader" hidden></div>` : ''}
     ${byArtist.length ? `<h2 class="section">More by ${esc(splitNs(artists[0])[1])}<a class="lnk" href="${esc(tagHref(artists[0]))}">See all</a></h2><div class="strip">${cards(byArtist)}</div>` : ''}
@@ -4724,7 +4757,7 @@ function openSettings() {
     <div class="field"><span class="l">SFW and NSFW</span>
       ${segHTML('modeSeg', [['nsfw', 'NSFW (18+)'], ['sfw', 'SFW']], st.mode)}
       <label class="check-row" style="margin-top:10px"><input type="checkbox" id="sfwStart"${st.sfwStart ? ' checked' : ''}> Always open Stash in SFW mode</label>
-      <div class="hint">Every item is either SFW or NSFW, and each mode shows only its own. What you add goes to the mode you’re in. To move things, use Edit on an item, or Select → Move to SFW. The button at the top switches modes; going back to NSFW takes two taps. In SFW mode, Explore has X; in NSFW mode, the other four sites.</div></div>
+      <div class="hint">Every item is either SFW or NSFW, and each mode shows only its own. What you add goes to the mode you’re in. To move things, use Edit on an item, or Select → Move to SFW. The button at the top switches modes; going back to NSFW takes two taps. In SFW mode, Explore has X; in NSFW mode, the other four sites and X.</div></div>
     <div class="field"><span class="l">Privacy</span>
       <label class="check-row"><input type="checkbox" id="blurChk"${st.blur ? ' checked' : ''}> Blur thumbnails</label>
       <div class="hint" style="margin:-6px 0 14px">On a computer they unblur when you hover. On a phone they stay blurred until you open one.</div>
@@ -4736,7 +4769,7 @@ function openSettings() {
       <div class="hint">Get a free key on your <a class="lnk" href="${SAUCE_KEY_PAGE}" target="_blank" rel="noopener noreferrer">SauceNAO account page</a>, in the api tab.</div></div>
     <div class="field"><span class="l">Explore</span>
       <label class="check-row"><input type="checkbox" id="adsChk"${st.bwAds !== false ? ' checked' : ''}> Block ads on the sites</label>
-      <div class="hint" style="margin:-6px 0 12px">Links that lead away from the four sites are always blocked. If a site doesn’t work properly, turn ad blocking off.</div>
+      <div class="hint" style="margin:-6px 0 12px">Links that lead away from the five sites are always blocked. If a site doesn’t work properly, turn ad blocking off.</div>
       <label class="check-row"><input type="checkbox" id="quickChk"${st.bwQuick ? ' checked' : ''}> Save to Stash right away with all the tags, without showing them first</label>
       ${NATIVE?.browseClearData ? `<button class="btn" id="bwClear" type="button">${I.broom}Forget site logins and history</button><div class="hint">Signs you out of the sites, X included, and clears what they stored. Your library isn’t touched.</div>` : ''}</div>
     <div class="field"><span class="l">Library</span>
