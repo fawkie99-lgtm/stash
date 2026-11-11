@@ -355,18 +355,51 @@ body:not([data-theme="crimson"]) .chip{border-radius:999px}
 .suggest div{padding:9px 11px;display:flex;justify-content:space-between;gap:10px;cursor:pointer;font-size:13px}
 .suggest div.hl,.suggest div:hover{background:var(--panel2)}
 .suggest small{color:var(--muted);font-weight:700}
+.kinds{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 7px;font-size:12px;color:var(--muted)}
+.kinds button{min-height:32px;padding:4px 12px;border:1px solid var(--line);background:none;color:var(--text);border-radius:999px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.kinds button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.kinds button[data-kind="artist"][aria-pressed="true"]{background:#2a72b5;border-color:#2a72b5;color:#fff}
+.kinds button[data-kind="character"][aria-pressed="true"]{background:#b8327a;border-color:#b8327a;color:#fff}
+.kinds button[data-kind="series"][aria-pressed="true"]{background:#8a6a00;border-color:#8a6a00;color:#fff}
+.chip .k{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;opacity:.85;flex:none}
+.chip[data-ns]{background:#9a5208;color:#fff}
+.chip[data-ns="artist"]{background:#2a72b5}
+.chip[data-ns="character"]{background:#b8327a}
+.chip[data-ns="series"],.chip[data-ns="parody"],.chip[data-ns="copyright"]{background:#8a6a00}
+.suggest .k{font-style:normal;font-size:11px;font-weight:800;text-transform:uppercase;margin-right:6px;color:#ffab5e}
+.suggest .k[data-ns="artist"]{color:#7cc4ff}
+.suggest .k[data-ns="character"]{color:#ff8fcf}
+.suggest .k[data-ns="series"],.suggest .k[data-ns="parody"],.suggest .k[data-ns="copyright"]{color:#ffd84a}
+body[data-theme="azure"] .suggest .k{color:#c25a00}
+body[data-theme="azure"] .suggest .k[data-ns="artist"]{color:#0a6fc2}
+body[data-theme="azure"] .suggest .k[data-ns="character"]{color:#c7307f}
+body[data-theme="azure"] .suggest .k[data-ns="series"],body[data-theme="azure"] .suggest .k[data-ns="parody"],body[data-theme="azure"] .suggest .k[data-ns="copyright"]{color:#9a7300}
 
 /* ---------- floating bits ---------- */
 #drop{position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;pointer-events:none}
 #drop.on{display:flex}
 #drop div{border:3px dashed var(--accent);border-radius:18px;padding:52px 64px;color:#fff;font-size:22px;font-weight:800;background:rgba(0,0,0,.35);text-align:center}
 #toasts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:max-content;max-width:calc(100% - 24px)}
-body.selecting #toasts{bottom:96px}
+body.selecting #toasts{bottom:130px}
 .toast{background:var(--toast);color:#fff;padding:11px 18px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35);font-weight:700;font-size:13px;animation:pop .2s;transition:opacity .3s;text-align:center}
 .toast.out{opacity:0}
-#bulk{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:90;background:var(--bar);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;padding:8px;display:none;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100% - 20px)}
+#bulk{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:90;background:var(--bar);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;padding:6px 8px 4px;display:none;flex-direction:column;gap:2px;width:420px;max-width:calc(100% - 20px)}
 body.selecting #bulk{display:flex}
-#bulk .n{font-weight:800;padding:0 8px;color:var(--strong);white-space:nowrap}
+#bulk .n{font-weight:800;padding:0 4px;color:var(--strong);white-space:nowrap;margin-right:auto}
+.bk-head{display:flex;align-items:center;gap:6px}
+.bk-acts{display:flex}
+.bk-acts button{flex:1;min-width:0;min-height:52px;border:0;background:none;color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:4px 2px;font:inherit;font-size:11px;font-weight:700;border-radius:10px;cursor:pointer}
+.bk-acts button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bk-acts button svg{width:22px;height:22px}
+.bk-acts button:hover:not(:disabled),.bk-acts button[aria-expanded="true"]{background:var(--panel2)}
+.bk-acts button:disabled{opacity:.4;cursor:default}
+.bk-acts .bk-del{color:#ff5a6e}
+body[data-theme="azure"] .bk-acts .bk-del{color:#c62a3c}
+.bk-more{position:absolute;right:0;bottom:calc(100% + 6px);min-width:210px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;display:flex;flex-direction:column}
+.bk-more[hidden]{display:none}
+.bk-more button{border:0;background:none;color:var(--text);text-align:left;font:inherit;font-size:14px;font-weight:600;padding:12px 12px;border-radius:8px;cursor:pointer}
+.bk-more button:hover:not(:disabled){background:var(--panel2)}
+.bk-more button:disabled{opacity:.4}
 .suggest svg{width:13px;height:13px;vertical-align:-2px;margin-right:3px}
 .pbar{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.28);z-index:2}
 .pbar i{display:block;height:100%;background:var(--accent)}
@@ -568,7 +601,7 @@ body[data-theme="azure"] .tag[data-ns="series"] .n,body[data-theme="azure"] .tag
   main{padding-bottom:120px}
   #bulk{bottom:env(safe-area-inset-bottom,0px)}
   #toasts{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
-  body.selecting #toasts{bottom:190px}
+  body.selecting #toasts{bottom:calc(120px + env(safe-area-inset-bottom,0px))}
   .to-top{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 }
 /* calmer top on phones: one slim bar that slides away while scrolling down and comes back on the way up.
@@ -608,7 +641,12 @@ body[data-theme="azure"] .tag[data-ns="series"] .n,body[data-theme="azure"] .tag
   .page-head .tools .seg a,.page-head .tools .seg button{border-radius:999px}
 }
 /* settings in four tabs */
-.set-tabs{position:sticky;top:0;z-index:2;margin:-6px -22px 16px;padding:8px 22px 10px;background:var(--panel)}
+/* Settings: the title, its close button and the section tabs stay at the top; Done stays at the bottom. */
+.set-top{position:sticky;top:0;z-index:2;margin:-22px -22px 16px;padding:12px 22px 10px;background:var(--panel);border-radius:calc(var(--radius) + 6px) calc(var(--radius) + 6px) 0 0}
+.set-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.set-title h3{margin:0}
+.set-title .icon-btn{margin-right:-8px}
+.set-foot{position:sticky;bottom:-24px;z-index:2;margin:20px -22px -22px;padding:12px 22px;background:var(--panel);border-top:1px solid var(--line);border-radius:0 0 calc(var(--radius) + 6px) calc(var(--radius) + 6px)}
 .set-tabs .seg{width:100%;flex-wrap:nowrap}
 .set-tabs .seg button{flex:1;padding:7px 4px}
 body.show-top .to-top{display:grid}
@@ -672,6 +710,7 @@ body.blur .thumb .pv.auto{filter:blur(18px) brightness(.9)!important}
 .lb-actions button{flex:1;max-width:120px;border:0;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;font:inherit;font-size:12px;font-weight:600;border-radius:10px;cursor:pointer}
 .lb-actions button:hover{background:rgba(255,255,255,.1)}
 .lb-actions svg{width:24px;height:24px}
+.lb-actions [data-lb="del"]{color:#ff8a80}
 .lb-menu{position:absolute;right:10px;bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:5;background:#1e1e1e;border-radius:14px;padding:6px;min-width:190px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
 .lb-menu button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;color:#fff;font:inherit;font-size:14px;font-weight:600;padding:11px 12px;border-radius:9px;text-align:left;cursor:pointer}
 .lb-menu button:hover{background:rgba(255,255,255,.08)}
@@ -756,10 +795,20 @@ body.pl-open .overlay{z-index:130}
 .pl-card{max-width:640px;margin:0 auto;padding:12px 12px 2px;border-bottom:1px solid var(--line)}
 .pl-h{display:flex;flex-direction:column;gap:3px;margin:0 2px 10px}
 .pl-h b{font-size:16px;line-height:1.3;color:var(--strong);overflow-wrap:anywhere}
-.pl-h small{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);min-width:0}
-.pl-h small svg{width:14px;height:14px;flex:none}
-.pl-artist{font-weight:700;flex:none;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pl-tags{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.cap-line{display:flex;flex-wrap:wrap;gap:0 12px;font-size:13px;line-height:1.4}
+.cap-t{display:inline-flex;min-height:28px;align-items:center;gap:4px;color:var(--muted);font-weight:600;text-decoration:none;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cap-t svg{width:14px;height:14px;flex:none}
+.cap-t[data-ns="artist"]{color:#7cc4ff;font-weight:700}
+.cap-t[data-ns="character"]{color:#ff8fcf}
+.cap-t[data-ns="series"],.cap-t[data-ns="parody"],.cap-t[data-ns="copyright"]{color:#ffd84a}
+body[data-theme="azure"] .pl-h .cap-t[data-ns="artist"]{color:#0a6fc2}
+body[data-theme="azure"] .pl-h .cap-t[data-ns="character"]{color:#c7307f}
+body[data-theme="azure"] .pl-h .cap-t[data-ns="series"],body[data-theme="azure"] .pl-h .cap-t[data-ns="parody"],body[data-theme="azure"] .pl-h .cap-t[data-ns="copyright"]{color:#9a7300}
+.fd-info .cap-line{font-size:14px}
+.fd-info .cap-t{pointer-events:auto;color:rgba(255,255,255,.88)}
+.fd-info .cap-t[data-ns="artist"]{color:#9fd4ff}
+.fd-info .cap-t[data-ns="character"]{color:#ffa8da}
+.fd-info .cap-t[data-ns="series"],.fd-info .cap-t[data-ns="parody"],.fd-info .cap-t[data-ns="copyright"]{color:#ffe07a}
 .pl-media{position:relative;width:100%;border-radius:14px;overflow:hidden;background:var(--panel);cursor:pointer;-webkit-user-select:none;user-select:none}
 .pl-pages{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .pl-pages::-webkit-scrollbar{display:none}
@@ -815,9 +864,6 @@ video{-webkit-touch-callout:none}
 .fd-side button.on svg{color:#ff3b5c;fill:#ff3b5c}
 .fd-info{position:absolute;left:14px;right:76px;bottom:calc(30px + env(safe-area-inset-bottom,0px));z-index:2;display:flex;flex-direction:column;gap:5px;text-shadow:0 1px 4px rgba(0,0,0,.8);pointer-events:none}
 .fd-info b{font-size:16px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.fd-info span{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700}
-.fd-info span svg{width:15px;height:15px}
-.fd-info small{font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fd-slide::after{content:'';position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(transparent,rgba(0,0,0,.55));pointer-events:none}
 .fd-bar{position:absolute;left:0;right:0;bottom:env(safe-area-inset-bottom,0px);height:22px;z-index:3;touch-action:none;cursor:pointer;display:flex;align-items:flex-end}
 .fd-bar::before{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.22)}
@@ -996,18 +1042,25 @@ body.bw-open .toast{padding:9px 14px;font-size:12.5px;max-width:calc(100vw - 24p
 </nav>
 
 <div id="bulk" role="toolbar" aria-label="Selection">
-  <span class="n">0 selected</span>
-  <button class="btn sm" data-bulk="all">Select all</button>
-  <button class="btn sm" data-bulk="tags" data-need>Add tags</button>
-  <button class="btn sm" data-bulk="untag" data-need>Remove tags</button>
-  <button class="btn sm" data-bulk="find" data-need>Find tags</button>
-  <button class="btn sm" data-bulk="album" data-need>Add to album</button>
-  <button class="btn sm" data-bulk="unalbum" data-need>Remove from album</button>
-  <button class="btn sm" data-bulk="post" data-need>Combine into post</button>
-  <button class="btn sm" data-bulk="fav" data-need>Favorite</button>
-  <button class="btn sm" data-bulk="side" data-need>Move to SFW</button>
-  <button class="btn sm danger" data-bulk="delete" data-need>Delete</button>
-  <button class="btn sm ghost" data-bulk="done">Done</button>
+  <div class="bk-head">
+    <span class="n">0 selected</span>
+    <button class="btn sm ghost" data-bulk="all">Select all</button>
+    <button class="btn sm" data-bulk="done">Done</button>
+  </div>
+  <div class="bk-acts">
+    <button type="button" data-bulk="tags" data-need data-ic="tag"><span>Add tags</span></button>
+    <button type="button" data-bulk="album" data-need data-ic="folder" aria-label="Add to album"><span>Album</span></button>
+    <button type="button" data-bulk="fav" data-need data-ic="heart"><span>Favorite</span></button>
+    <button type="button" data-bulk="more" data-need data-ic="dots" aria-haspopup="true" aria-expanded="false"><span>More</span></button>
+    <button type="button" class="bk-del" data-bulk="delete" data-need data-ic="trash"><span>Delete</span></button>
+  </div>
+  <div class="bk-more" role="menu" hidden>
+    <button type="button" role="menuitem" data-bulk="untag" data-need>Remove tags</button>
+    <button type="button" role="menuitem" data-bulk="find" data-need>Find tags</button>
+    <button type="button" role="menuitem" data-bulk="unalbum" data-need>Remove from album</button>
+    <button type="button" role="menuitem" data-bulk="post" data-need>Combine into post</button>
+    <button type="button" role="menuitem" data-bulk="side" data-need>Move to SFW</button>
+  </div>
 </div>
 <div id="drop"><div>Drop to add to your stash</div></div>
 <div id="toasts" aria-live="polite"></div>
@@ -1055,8 +1108,8 @@ body.bw-open .toast{padding:9px 14px;font-size:12.5px;max-width:calc(100vw - 24p
     <div class="lb-actions">
       <button type="button" data-lb="edit" data-label="Edit"></button>
       <button type="button" data-lb="save" data-label="Save"></button>
-      <button type="button" data-lb="del" data-label="Delete"></button>
       <button type="button" data-lb="more" data-label="More"></button>
+      <button type="button" data-lb="del" data-label="Delete"></button>
     </div>
   </div>
   <div class="lb-menu" hidden>
@@ -1151,6 +1204,7 @@ const I = {
   grid: svg('<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>'),
   list: svg('<path d="M9 6h11M9 12h11M9 18h11M4 6h1M4 12h1M4 18h1"/>'),
   dots: svg('<circle cx="12" cy="5" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="12" cy="19" r="1.3"/>'),
+  tag: svg('<path d="M3.5 12.6V5a1.5 1.5 0 0 1 1.5-1.5h7.6l8 8a1.5 1.5 0 0 1 0 2.1l-7.5 7.5a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.2" cy="8.2" r="1.4"/>'),
   find: svg('<path d="M4 15V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="m4 15 4-4 3 3"/><circle cx="15.5" cy="15.5" r="3.5"/><path d="m21 21-3-3"/>'),
   bookmark: svg('<path d="M6.5 3.5h11a1 1 0 0 1 1 1v16l-6.5-4.2-6.5 4.2v-16a1 1 0 0 1 1-1z"/>'),
   compass: svg('<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>'),
@@ -1185,6 +1239,17 @@ const splitNs = t => { const i = t.indexOf(':'); return i > 0 ? [t.slice(0, i), 
 const nsLabel = ns => !ns ? 'Tags' : cap(/[^aeiou]y$/.test(ns) ? ns.slice(0, -1) + 'ies' : /s$/.test(ns) ? ns : ns + 's');
 const tagHref = t => '#/tag/' + encodeURIComponent(t);
 const albumHref = a => '#/album/' + encodeURIComponent(a);
+// The names under a title in the swipe feed and the photo list: artist, characters, series, then a few plain
+// tags, in their tag colours. Each one opens its page.
+const CAP_ORDER = ['artist', 'character', 'series', 'parody', 'copyright', ''];
+function capTagsHTML(it, max = 7) {
+  const picked = it.tags.map(t => [CAP_ORDER.indexOf(splitNs(t)[0]), t]).filter(([r]) => r >= 0)
+    .sort((a, b) => a[0] - b[0]).slice(0, max);
+  return picked.map(([, t]) => {
+    const [ns, name] = splitNs(t);
+    return `<a class="cap-t" data-ns="${esc(ns)}" href="${esc(tagHref(t))}">${ns === 'artist' ? I.user : ns ? '' : '#'}${esc(name)}</a>`;
+  }).join('');
+}
 const hash = str => { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
 
 /* ================= settings ================= */
@@ -1366,13 +1431,16 @@ function dbPutItem(metaRec, fileRec, thumbRec) {
   if (thumbRec) t.objectStore('thumbs').put(thumbRec, metaRec.id);
   return txDone(t);
 }
-async function dbPutMeta(list) {
-  const recs = await Promise.all(list.map(encMeta));
+// keep(item): checked again after encrypting, right before the write (items deleted meanwhile are left out).
+async function dbPutMeta(list, keep = null) {
+  let recs = await Promise.all(list.map(encMeta));
+  if (keep) { recs = recs.filter((r, i) => keep(list[i])); if (!recs.length) return; }
   const t = db.transaction('meta', 'readwrite'); const s = t.objectStore('meta');
   recs.forEach(r => s.put(r));
   return txDone(t);
 }
-function dbDelete(ids) { const t = db.transaction(STORES, 'readwrite'); ids.forEach(id => STORES.forEach(n => t.objectStore(n).delete(id))); return txDone(t); }
+const OWN = 'own:'; // thumbs key for page 1's own thumbnail while its post shows another page
+function dbDelete(ids) { const t = db.transaction(STORES, 'readwrite'); ids.forEach(id => { STORES.forEach(n => t.objectStore(n).delete(id)); t.objectStore('thumbs').delete(OWN + id); }); return txDone(t); }
 function dbAllKV(store) {
   return new Promise((res, rej) => {
     const out = new Map(); const r = db.transaction(store).objectStore(store).openCursor();
@@ -1381,7 +1449,9 @@ function dbAllKV(store) {
   });
 }
 function dbDeleteKV(keys) { const t = db.transaction('kv', 'readwrite'); keys.forEach(k => t.objectStore('kv').delete(k)); return txDone(t); }
-function dbWipe() { const all = ['kv', ...STORES]; const t = db.transaction(all, 'readwrite'); all.forEach(n => t.objectStore(n).clear()); return txDone(t); }
+// Goes up the moment the library is erased, before anything is cleared; long jobs check it before each write.
+let libGen = 0;
+function dbWipe() { libGen++; const all = ['kv', ...STORES]; const t = db.transaction(all, 'readwrite'); all.forEach(n => t.objectStore(n).clear()); return txDone(t); }
 async function saveMeta(items, msg) {
   try { await dbPutMeta(items); changed(); if (msg) toast(msg); return true; }
   catch (e) { console.error(e); toast('Couldn’t save the changes: ' + (e?.message || e)); return false; }
@@ -1605,7 +1675,9 @@ function parseQuery(q) {
   return (q.match(/-?"[^"]*"|\S+/g) || []).map(t => {
     let neg = false;
     if (t.length > 1 && t[0] === '-') { neg = true; t = t.slice(1); }
-    return { neg, v: normTag(t.replace(/^"|"$/g, '')) };
+    const raw = t.replace(/^"|"$/g, '');
+    // "artist:" on its own means every artist tag; normTag would drop the colon and make it a plain word.
+    return { neg, v: normTag(raw) + (/[^:s]:s*$/.test(raw) ? ':' : '') };
   }).filter(t => t.v);
 }
 function matchTok(it, v, exact) {
@@ -1615,7 +1687,10 @@ function matchTok(it, v, exact) {
   if (v === 'is:untagged') return !it.tags.length;
   if (v === 'is:post') return (it.pages?.length || 0) > 1;
   if (exact) return it.tags.some(t => t === v || splitNs(t)[1] === v) || it.albums.some(a => a.toLowerCase() === v);
-  return it.tags.some(t => t.includes(v)) || (it.title || '').toLowerCase().includes(v)
+  // A plain word looks only at the tag's name, so "art" doesn't match every "artist:…" tag. Typing the kind
+  // ("artist:ab") still searches the whole tag.
+  const inTag = v.includes(':') ? t => t.includes(v) : t => splitNs(t)[1].includes(v);
+  return it.tags.some(inTag) || (it.title || '').toLowerCase().includes(v)
     || it.albums.some(a => a.toLowerCase().includes(v)) || (it.name || '').toLowerCase().includes(v);
 }
 function search(q, exact) { const toks = parseQuery(q), pool = topItems(); return toks.length ? pool.filter(it => toks.every(t => matchTok(it, t.v, exact) !== t.neg)) : pool; }
@@ -1955,7 +2030,7 @@ function dateGroup(ts) {
   if (ts >= start - day) return 'Yesterday';
   if (ts >= start - 6 * day) return 'This week';
   if (d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth()) return 'Earlier this month';
-  return d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+  return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
 }
 function libChunk(sorted, from, to, label) {
   let html = '', open = false;
@@ -2157,7 +2232,7 @@ function artistView(tag, page) {
   const items = tab === 'dj' ? all.filter(isPost) : tab === 'fav' ? all.filter(i => i.fav) : all;
   const views = all.reduce((a, i) => a + (i.views || 0), 0), djs = all.filter(isPost).length;
   const first = all.reduce((m, i) => Math.min(m, i.added || Infinity), Infinity);
-  const since = Number.isFinite(first) ? new Date(first).toLocaleDateString(undefined, { month: 'long', year: 'numeric' }) : '';
+  const since = Number.isFinite(first) ? new Date(first).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) : '';
   const { tags: tc } = counts();
   const rel = relatedTags(tag, 8).filter(([t]) => !t.startsWith('artist:')).slice(0, 6);
   const tabHref = v => hrefWith(qq => { if (v) qq.set('tab', v); else qq.delete('tab'); qq.delete('page'); });
@@ -2218,18 +2293,20 @@ function tagsView(q) {
     ${untagged && S.items.length ? `<p class="note"><a class="lnk" href="#/untagged">${plural(untagged, 'item')} without tags</a></p>` : ''}
     <div id="tagList"></div></div>`;
   const el = $('#tagList', app);
-  const disp = t => cur === null ? t : splitNs(t)[1];
+  // Sorted and filed by the name itself, so in All "artist:bob" is under B (with its kind shown faintly), not under A.
+  const disp = t => splitNs(t)[1];
   const draw = () => {
-    const f = normTag($('#tagFilter', app)?.value || '');
-    const list = all.filter(([t]) => !f || t.includes(f));
-    if (!tc.size) { el.innerHTML = `<div class="empty"><h2>No tags yet</h2><p>Add tags while uploading, with the Edit button on any item, or select several items and use “Add tags”. Prefixes like artist:name or character:name group tags into their own sections.</p></div>`; return; }
+    const raw = $('#tagFilter', app)?.value || '', f = normTag(raw);
+    const hit = /:s*$/.test(raw) ? t => t.startsWith(f + ':') : f.includes(':') ? t => t.includes(f) : t => disp(t).includes(f);
+    const list = all.filter(([t]) => !f || hit(t));
+    if (!tc.size) { el.innerHTML = `<div class="empty"><h2>No tags yet</h2><p>Add tags while uploading, with the Edit button on any item, or select several items and use “Add tags”. Tags marked Artist, Character or Series get their own sections.</p></div>`; return; }
     if (!list.length) { el.innerHTML = `<p class="muted">No tags match “${esc(f)}”.</p>`; return; }
     if (sort === 'pop') {
       list.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
       el.innerHTML = `<div>${list.map(([t, c]) => tagPill(t, c, cur === null)).join('')}</div>`;
       return;
     }
-    list.sort((a, b) => disp(a[0]).localeCompare(disp(b[0]), undefined, { numeric: true }));
+    list.sort((a, b) => disp(a[0]).localeCompare(disp(b[0]), undefined, { numeric: true }) || a[0].localeCompare(b[0]));
     const groups = new Map();
     for (const e of list) { const d = disp(e[0]); const L = /^[a-z]/i.test(d) ? d[0].toUpperCase() : '#'; if (!groups.has(L)) groups.set(L, []); groups.get(L).push(e); }
     const keys = [...groups.keys()].sort((a, b) => a === '#' ? -1 : b === '#' ? 1 : a.localeCompare(b));
@@ -2460,6 +2537,8 @@ async function makePost(ids, title) {
   for (const m of touched) { if (sfw) m.sfw = true; else delete m.sfw; }
   for (const pid of pages) { const pg = S.byId.get(pid); if (pg) { if (sfw) pg.sfw = true; else delete pg.sfw; touched.add(pg); } }
   S.selected.clear();
+  // A post merged into another one becomes an ordinary page again: it gets its own thumbnail back.
+  for (const t of touched) if (t !== cover && t.ownThumb && !t.pages) { try { await restoreOwnThumb(t); } catch (e) { console.warn(e); } }
   return (await saveMeta([...touched])) ? cover : null;
 }
 async function splitPost(post) {
@@ -2467,12 +2546,27 @@ async function splitPost(post) {
   const pages = post.pages.map(id => S.byId.get(id)).filter(Boolean);
   for (const pg of pages) if (pg.id !== post.id) { delete pg.parent; if (post.sfw) pg.sfw = true; else delete pg.sfw; pg.tags = uniq([...pg.tags, ...post.tags]); pg.albums = uniq([...pg.albums, ...post.albums]); }
   delete post.pages;
+  try { await restoreOwnThumb(post); } catch (e) { console.warn(e); }
   if (await saveMeta(pages, `Split into ${plural(pages.length, 'item')}`)) render({ keep: true });
 }
 async function putThumbRec(id, rec) { const t = db.transaction('thumbs', 'readwrite'); t.objectStore('thumbs').put(rec, id); await txDone(t); }
+// Gives page 1 of a post its own thumbnail back (see setPostThumb).
+async function restoreOwnThumb(it) {
+  if (!it.ownThumb) return;
+  const own = await dbGet('thumbs', OWN + it.id);
+  if (own) { await putThumbRec(it.id, own); const t = db.transaction('thumbs', 'readwrite'); t.objectStore('thumbs').delete(OWN + it.id); await txDone(t); }
+  delete it.ownThumb;
+  const old = S.thumbs.get(it.id); if (old) { URL.revokeObjectURL(old); S.thumbs.delete(it.id); }
+}
 async function setPostThumb(post, pid) {
   try {
     const rec = await dbGet('thumbs', pid); if (!rec) return toast('That page has no thumbnail');
+    // The post's thumbnail is page 1's own record (they share an id). Keep page 1's own picture aside
+    // the first time, so splitting the post later gives page 1 its real thumbnail back.
+    if (!post.ownThumb) {
+      const own = await dbGet('thumbs', post.id);
+      if (own) { await putThumbRec(OWN + post.id, own); post.ownThumb = true; await dbPutMeta([post]); }
+    }
     await putThumbRec(post.id, rec);
     const old = S.thumbs.get(post.id); if (old) { URL.revokeObjectURL(old); S.thumbs.delete(post.id); }
     if (!post.hasThumb) { post.hasThumb = true; await dbPutMeta([post]); }
@@ -2511,8 +2605,14 @@ function updateBulk() {
   $('#bulk .n').textContent = `${S.selected.size.toLocaleString()} selected`;
   $$('#bulk [data-need]').forEach(b => b.disabled = !S.selected.size);
   const sel = [...S.selected].map(id => S.byId.get(id)).filter(Boolean);
-  $('#bulk [data-bulk="fav"]').textContent = sel.length && sel.every(i => i.fav) ? 'Unfavorite' : 'Favorite';
+  $('#bulk [data-bulk="fav"] span').textContent = sel.length && sel.every(i => i.fav) ? 'Unfavorite' : 'Favorite';
   $('#bulk [data-bulk="side"]').textContent = modeSfw() ? 'Move to NSFW' : 'Move to SFW';
+  if (!S.selected.size || !S.selecting) bulkMore(false);
+}
+// The selection bar's More menu (the less used actions).
+function bulkMore(open) {
+  const menu = $('#bulk .bk-more'), b = $('#bulk [data-bulk="more"]');
+  menu.hidden = !open; b.setAttribute('aria-expanded', String(!!open));
 }
 
 async function toggleFav(ids, force) {
@@ -2597,12 +2697,10 @@ async function nativeSave(blob, name, onProgress, dest = 'download') {
   } finally { where = NATIVE.saveEnd(id, ok); }
   return where;
 }
-async function offerRemoveOriginals(files) {
-  const n = files.length;
-  const ok = await confirmDialog('Remove the originals from your gallery?',
-    `${n === 1 ? 'The file you just added is' : `The ${n} files you just added are`} safely in Stash. Android will ask you to confirm. Then they go to your phone’s trash, which deletes them for good after 30 days.`,
-    'Remove from gallery', false);
-  if (!ok) return;
+// From the "Added" message's "Remove originals" button. Android asks to confirm, then the originals go to the
+// phone's trash (deleted for good after 30 days).
+const ORIG_OFFER_MS = 15000;
+async function removeOriginals(files) {
   const r = await nativeAsk('removeOriginals', JSON.stringify(files.map(f => ({ name: f.name, size: f.size }))));
   const st = r?.status;
   if (st === 'ok') toast(r.found < r.asked ? `Moved ${r.found} of ${r.asked} to the phone’s trash. Delete the rest in your gallery.` : `Moved ${plural(r.found, 'original')} to the phone’s trash`, 4500);
@@ -2768,6 +2866,9 @@ function suggestFrom(results, dan, minSim = SAUCE_MIN) {
   });
   out.title = (use.find(r => r.doujin && r.title) || {}).title || '';
   out.url = (use.find(r => r.url && BOORU.test(r.site)) || use.find(r => r.url) || {}).url || '';
+  // A match tagged with content involving minors: nothing from it is offered or saved.
+  out.blocked = minorsHit({ tags: [...out.artist, ...out.character, ...out.series, ...out.general].map(x => x.tag), title: out.title })
+    || use.some(r => textBlocked(r.title));
   return out;
 }
 
@@ -2813,8 +2914,14 @@ async function findTags(it) {
   }
   if (!m.ov.isConnected) { URL.revokeObjectURL(qUrl); return; }
   const sg = suggestFrom(res.results, dan);
+  if (sg.blocked) {
+    if (qUrl) URL.revokeObjectURL(qUrl);
+    body.innerHTML = `<p>The match for this picture is tagged with content involving minors, so nothing from it is shown or saved.</p>`;
+    okBtn.hidden = true;
+    return;
+  }
   const leftTxt = Number.isFinite(res.left.long) ? `<div class="hint">SauceNAO searches left today: ${res.left.long}</div>` : '';
-  const others = res.results.filter(r => r !== sg.best).slice(0, 5);
+  const others = res.results.filter(r => r !== sg.best && !textBlocked(r.title) && !(r.characters || []).some(isBlockedTag)).slice(0, 5);
   const matchRow = r => `<a class="ft-match" href="${esc(r.url || '#')}" target="_blank" rel="noopener noreferrer"${r.url ? '' : ' data-nolink'}>${r.thumb ? `<img src="${esc(r.thumb)}" alt="" referrerpolicy="no-referrer">` : '<span class="ph"></span>'}<span><b>${esc(r.site)}</b> · ${pct(r.sim)}${r.artists[0] ? `<br><span class="muted">${esc(r.artists.join(', '))}</span>` : ''}${r.title ? `<br><span class="muted">${esc(r.title)}</span>` : ''}</span></a>`;
   if (!sg.best) {
     body.innerHTML = `<div class="ft-head"><img src="${qUrl}" alt=""><p>No match found. SauceNAO knows drawings from Pixiv, Danbooru, Gelbooru, nhentai and similar sites. Real photos, edits and pictures that were never posted on those sites won’t be found.</p></div>
@@ -2872,7 +2979,7 @@ async function bulkFind(items) {
     <div class="foot"><button class="btn" id="bfStop">Stop</button></div>`);
   m.ov.dataset.busy = '1';
   const bar = $('.progress i', m.el), txt = $('#bfTxt', m.el);
-  let stop = false, tagged = 0, none = 0, failed = 0, done = 0, why = '';
+  let stop = false, tagged = 0, none = 0, failed = 0, done = 0, refused = 0, why = '';
   $('#bfStop', m.el).onclick = () => { stop = true; $('#bfStop', m.el).disabled = true; txt.textContent = 'Stopping…'; };
   const wait = async ms => { const end = Date.now() + ms; while (!stop && Date.now() < end) await sleep(250); };
   for (let k = 0; k < todo.length && !stop; k++) {
@@ -2883,9 +2990,10 @@ async function bulkFind(items) {
     try {
       const { results, left } = await sauceSearch(await lookupImage(it));
       const sg = suggestFrom(results, null, SAUCE_AUTO);
-      const add = [...sg.artist, ...sg.character, ...sg.series].filter(x => x.on).map(x => x.tag).filter(t => !it.tags.includes(t));
+      const add = sg.blocked ? [] : [...sg.artist, ...sg.character, ...sg.series].filter(x => x.on).map(x => x.tag).filter(t => !it.tags.includes(t));
       it.looked = Date.now();
-      if (sg.best) { it.tags = uniq([...it.tags, ...add]); if (!it.src && sg.url) it.src = sg.url; if (add.length) tagged++; else none++; } else none++;
+      if (sg.blocked) refused++;
+      else if (sg.best) { it.tags = uniq([...it.tags, ...add]); if (!it.src && sg.url) it.src = sg.url; if (add.length) tagged++; else none++; } else none++;
       await dbPutMeta([it]); done++;
       if (left.long <= 0) { why = 'SauceNAO’s daily limit is used up, so it stopped here. Run it again tomorrow and it continues with the rest.'; break; }
       if (left.short <= 0) pause = 31000;
@@ -2899,6 +3007,7 @@ async function bulkFind(items) {
   delete m.ov.dataset.busy; m.close(); changed();
   const parts = [`Tagged ${plural(tagged, 'item')}`];
   if (none) parts.push(`${none} had no close match`);
+  if (refused) parts.push(`${refused} matched content involving minors, so nothing was added to ${refused === 1 ? 'it' : 'them'}`);
   if (failed) parts.push(`${failed} failed`);
   if (done || !why) toast(parts.join(', ') + (stop && done < todo.length && !why ? '. Stopped.' : '.'), 5000);
   if (why) toast(why, 7000);
@@ -3160,8 +3269,11 @@ async function startArchiveImport(archives, jsons = [], others = 0) {
     const out = [];
     if (r.posts) out.push(`imported ${plural(r.posts, split && good.some(b => b.chapters.length > 1) ? 'post' : 'book')}`);
     if (r.dup) out.push(`skipped ${r.dup} already in your stash`);
-    if (r.failed) out.push(`${plural(r.failed, 'page')} couldn’t be read`);
-    toast(cap(out.join(', ') || 'Nothing was imported'), 4500);
+    if (r.failed) out.push(`${plural(r.failed, 'page')} ${r.full ? 'didn’t fit (storage is full)' : 'couldn’t be read'}`);
+    if (r.short) out.push(`${plural(r.short, 'book')} saved only in part, so you can import ${r.short === 1 ? 'it' : 'them'} again later`);
+    if (r.notStarted) out.push(`${plural(r.notStarted, 'more book')} not started because storage is full`);
+    if (r.blocked) out.push(`${plural(r.blocked, 'book')} not saved: ${NO_MINORS}`);
+    toast(cap(out.join(', ') || 'Nothing was imported'), r.blocked || r.short ? 8000 : 4500);
     if (S.key) render({ keep: true });
   };
 }
@@ -3169,7 +3281,7 @@ async function startArchiveImport(archives, jsons = [], others = 0) {
 async function importBooks(books, { extraTags, extraAlbums, split, skip }, onProgress) {
   const have = new Set(S.all.map(i => i.afp).filter(Boolean));
   const total = books.reduce((a, b) => a + b.chapters.reduce((x, c) => x + c.pages.length, 0), 0);
-  let done = 0, posts = 0, dup = 0, failed = 0;
+  let done = 0, posts = 0, dup = 0, failed = 0, blocked = 0, short = 0, notStarted = 0, full = false;
   const fps = new Map();
   const fpOf = async f => { if (!fps.has(f)) fps.set(f, await fingerprint(f).catch(() => '')); return fps.get(f); };
   for (let bi = 0; bi < books.length; bi++) {
@@ -3179,6 +3291,11 @@ async function importBooks(books, { extraTags, extraAlbums, split, skip }, onPro
       ...b.artists.map(a => normTag('artist:' + a)), ...b.groups.map(g => normTag('group:' + g)),
       ...b.characters.map(c => normTag('character:' + c)), ...b.series.map(s => normTag('series:' + s)),
     ].filter(t => t && !/:$/.test(t)));
+    const pageCount = b.chapters.reduce((x, c) => x + c.pages.length, 0);
+    if (minorsHit({ tags, albums: [...extraAlbums, ...b.series], title: b.title, name: b.file?.name || '' })
+      || (b.files || []).some(f => textBlocked(f.name)) || b.chapters.some(c => textBlocked(c.name))) {
+      blocked++; done += pageCount; onProgress(done, total, `Not saved: ${b.title}`); continue;
+    }
     const units = split && b.chapters.length > 1
       ? b.chapters.map((c, k) => ({ title: `${b.title} · ${c.name || `Chapter ${k + 1}`}`, pages: c.pages, file: c.file || b.file, key: k, albums: uniq([...extraAlbums, b.title]) }))
       : [{ title: b.title, pages: b.chapters.flatMap(c => c.pages.map(e => ({ e, file: c.file || b.file }))), file: null, key: 'all', albums: extraAlbums, mixed: true }];
@@ -3195,17 +3312,22 @@ async function importBooks(books, { extraTags, extraAlbums, split, skip }, onPro
         onProgress(done + i + frac, total, `${books.length > 1 ? `Book ${bi + 1} of ${books.length}: ` : ''}${u.title} · page ${i + 1} of ${n}`);
       });
       done += list.length; failed += r.failed;
+      // Only a book saved in full gets marked as imported; one cut short can be imported again later.
+      const whole = r.ids.length === list.length;
+      if (!whole && r.ids.length) short++;
       let cover = null;
       if (r.ids.length > 1) cover = await makePost(r.ids, u.title);
       else if (r.ids.length === 1) { cover = S.byId.get(r.ids[0]); cover.title = u.title; }
       if (cover) {
-        cover.afp = afp; if (b.src && !cover.src) cover.src = b.src;
-        await saveMeta([cover]); have.add(afp); posts++;
+        if (whole) { cover.afp = afp; if (b.src && !cover.src) cover.src = b.src; have.add(afp); }
+        await saveMeta([cover]); posts++;
       }
+      if (r.full) { full = true; break; }
     }
+    if (full) { notStarted = books.length - bi - 1; break; }
   }
   changed();
-  return { posts, dup, failed };
+  return { posts, dup, failed, blocked, short, notStarted, full };
 }
 
 /* ================= SFW and NSFW ================= */
@@ -3343,13 +3465,35 @@ const NO_MINORS = 'Stash doesn’t search for or save content involving minors.'
 const BLOCK_TAGS = new Set(['loli', 'lolicon', 'shota', 'shotacon', 'toddlercon', 'toddler', 'child', 'children', 'kid', 'kids',
   'young', 'underage', 'preteen', 'minor', 'infant', 'cub', 'female child', 'male child', 'kindergarten',
   'kindergartener', 'elementary school', 'elementary school student', 'mesugaki']);
-const isBlockedTag = t => BLOCK_TAGS.has(splitNs(normTag(t))[1]);
+// Every part between colons is checked, so "artist:loli" and "a:b:loli" are both caught.
+const isBlockedTag = t => normTag(t).split(':').some(p => BLOCK_TAGS.has(p.trim()));
 // A search for those, ignoring tags it leaves out (-loli is fine).
 function queryBlocked(q) {
   const kept = String(q || '').split(/\s+/).filter(w => w && !/^[-~]/.test(w)).join(' ');
   const flat = ' ' + normTag(kept.replace(/[^\p{L}\p{N}_]+/gu, ' ')) + ' ';
   for (const t of BLOCK_TAGS) if (flat.includes(' ' + t + ' ')) return true;
   return false;
+}
+// Words on the list that are also everyday words ("my kids at the beach", "Young Justice"). As tags they are blocked;
+// inside free text (titles, file names, album names, tweet text) only the rest of the list counts. Same list in browse.js.
+const TEXT_ORDINARY = new Set(['child', 'children', 'kid', 'kids', 'young', 'minor', 'infant', 'cub', 'toddler', 'kindergarten', 'elementary school']);
+const TEXT_BLOCK = [...BLOCK_TAGS].filter(t => !TEXT_ORDINARY.has(t));
+// Those words inside a title, a file name or an album name ("loli_02.jpg", "Shota Collection").
+function textBlocked(s) {
+  const flat = ' ' + String(s || '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').replace(/\s+/g, ' ').trim() + ' ';
+  return TEXT_BLOCK.some(t => flat.includes(' ' + t + ' '));
+}
+// Anything about to be saved: its tags, title, file name and albums. Used on every way in, not only Explore.
+const minorsHit = ({ tags = [], albums = [], title = '', name = '' } = {}) =>
+  tags.some(isBlockedTag) || albums.some(textBlocked) || textBlocked(title) || textBlocked(name);
+// A page opened inside Explore: its search, tag list or tag page ("/tag/lolicon/", "?tags=loli").
+function urlBlocked(url) {
+  let u; try { u = new URL(url); } catch { return false; }
+  const site = siteOfUrl(url); if (!site) return false;
+  const bits = [WEB[site].qOf(u), u.searchParams.get('tags'), u.searchParams.get('q'), u.searchParams.get('search[name]'), u.searchParams.get('search[name_matches]')];
+  const m = u.pathname.match(/^\/(?:tags?|wiki_pages|characters?|parod(?:y|ies)|artists?|groups?)\/([^/]+)/i);
+  if (m) { try { bits.push(decodeURIComponent(m[1]).replace(/[-_]+/g, ' ')); } catch {} }
+  return bits.some(b => b && queryBlocked(b));
 }
 function addRecent(site, q) {
   q = String(q || '').trim(); if (!q || queryBlocked(q)) return;
@@ -3580,7 +3724,7 @@ function bwDrawTop() {
   rl.innerHTML = BW.loading ? I.x : I.reload; rl.setAttribute('aria-label', BW.loading ? 'Stop' : 'Reload');
 }
 // Saved before? (An X post with several pictures is saved as one item per picture: url/photo/1, /2…)
-const savedItem = url => url ? S.all.find(i => !i.parent && (i.src === url || i.src?.startsWith(url + '/'))) : null;
+const savedItem = url => url ? S.all.find(i => !i.parent && !i.partial && (i.src === url || i.src?.startsWith(url + '/'))) : null;
 // X posts in the library, for the page's buttons.
 function xSavedIds() {
   const out = {};
@@ -3701,7 +3845,7 @@ function cleanPost(p) {
     series: grab('series').filter(t => t !== 'original'), group: grab('group'), language: grab('language'),
     general: grab('general').filter(t => !TAG_JUNK.test(t)),
   };
-  if (Object.values(tags).some(l => l.some(t => BLOCK_TAGS.has(t)))) return { blocked: true };
+  if (Object.values(tags).some(l => l.some(t => BLOCK_TAGS.has(t))) || textBlocked(p.title)) return { blocked: true };
   const url = String(p.url || ''), page = String(p.page || '');
   if (siteOfUrl(url) !== p.site) return null;
   return {
@@ -3962,6 +4106,7 @@ function startDownload(p) {
 }
 function bwEnqueue(p, { title, tags, albums = [], sfw = false, quiet = false, fav = false }) {
   if (BWQ.busy.has(p.url)) return;
+  if (p.blocked || minorsHit({ title: title || webTitle(p), albums, tags })) { toast(NO_MINORS, 4500); if (p.site === 'x' && p.id) bwMarks({ [p.id]: 'error' }); return; }
   BWQ.list.push({ p, title: title || webTitle(p), tags: uniq(tags.map(normTag)).filter(t => t && !isBlockedTag(t)), albums, sfw, quiet, fav, done: 0, total: Math.max(1, p.files.length), frac: 0 });
   if (p.site === 'x') bwMarks({ [p.id]: 'saving' });
   BWQ.busy.add(p.url);
@@ -4036,7 +4181,9 @@ async function bwSaveJob(q) {
   else { item = S.byId.get(r.ids[0]); if (item) item.title = q.title; }
   if (!item) throw new Error('couldn’t make the post');
   item.src = p.url; item.looked = Date.now();
-  if (p.kind === 'book') item.afp = 'web:' + p.url;
+  // Saved only in part (storage full, a page that didn't download): not marked as saved, so it can be saved again.
+  if (r.failed) item.partial = true;
+  else if (p.kind === 'book') item.afp = 'web:' + p.url;
   await saveMeta([item]);
   BW.dirty = true; if (!BW.open) { BW.dirty = false; render({ keep: true }); }
   const miss = r.failed, where = q.sfw ? ' to SFW' : '';
@@ -4068,6 +4215,14 @@ window.__stashBrowse = (type, d) => {
   if (!BW.open) return;
   if (type === 'page') {
     const url = String(d.url || '');
+    // The site's own search box, a tag link or a "related tags" link: stopped like Stash's own search.
+    if (urlBlocked(url)) {
+      const s = siteOfUrl(url);
+      if (BW.stopped !== url) { BW.stopped = url; toast(NO_MINORS, 4500); }
+      try { NATIVE.browseLoad(WEB[s].home); } catch {}
+      return;
+    }
+    BW.stopped = '';
     if (/^https:\/\//.test(url)) {
       if (noHash(url) !== noHash(BW.url)) { BW.post = null; BW.postFor = ''; if (BW.sheet) bwCloseSheet(); }
       BW.url = url;
@@ -4195,10 +4350,10 @@ async function restoreItems(ids) {
 }
 async function purgeItems(ids) {
   const all = [...withPages(ids)];
-  await dbDelete(all);
+  const set = new Set(all), before = S.trash;
+  S.trash = S.trash.filter(m => !set.has(m.id)); // first, so a fingerprint scan running now can't save them back
+  try { await dbDelete(all); } catch (e) { S.trash = before; throw e; }
   await dbDeleteKV(all.map(id => 'pv:' + id)).catch(() => {});
-  const set = new Set(all);
-  S.trash = S.trash.filter(m => !set.has(m.id));
   all.forEach(id => { const u = S.thumbs.get(id); if (u) { URL.revokeObjectURL(u); S.thumbs.delete(id); } });
   updateTrashLink();
 }
@@ -4207,15 +4362,27 @@ async function purgeOldTrash() {
   const old = trashTop(true).filter(m => m.deleted < cutoff).map(m => m.id);
   if (old.length) { try { await purgeItems(old); if (parseHash().parts[0] === 'trash') render({ keep: true }); } catch (e) { console.warn(e); } }
 }
+const UNDO_MS = 7000;
+let undoOpen = null; // the Undo message on screen: { t, ids, back, timer, close }
 function undoToast(msg, ids, back) {
+  if (undoOpen) { // join the one already showing
+    const u = undoOpen;
+    u.ids = [...new Set([...u.ids, ...ids])]; u.back = null;
+    $('span', u.t).textContent = `${plural(u.ids.length, 'item')} moved to Recently deleted`;
+    clearTimeout(u.timer); u.timer = setTimeout(u.close, UNDO_MS);
+    return;
+  }
   const t = document.createElement('div'); t.className = 'toast act';
   t.innerHTML = `<span>${esc(msg)}</span><button type="button">Undo</button>`;
   $('#toasts').appendChild(t);
   let gone = false;
-  const close = () => { if (gone) return; gone = true; t.classList.add('out'); setTimeout(() => t.remove(), 300); };
-  const timer = setTimeout(close, 7000);
+  const u = { t, ids: [...ids], back };
+  u.close = () => { if (gone) return; gone = true; if (undoOpen === u) undoOpen = null; t.classList.add('out'); setTimeout(() => t.remove(), 300); };
+  u.timer = setTimeout(u.close, UNDO_MS);
+  undoOpen = u;
   t.querySelector('button').onclick = async () => {
-    clearTimeout(timer); close();
+    clearTimeout(u.timer); u.close();
+    const { ids, back } = u;
     try {
       const n = await restoreItems(ids);
       toast(`Restored ${plural(n, 'item')}`);
@@ -4223,12 +4390,13 @@ function undoToast(msg, ids, back) {
     } catch (e) { toast('Couldn’t restore: ' + (e?.message || e)); }
   };
 }
+let inAppNav = false; // true once you've moved between pages inside Stash, so Back stays in the app
 async function deleteOne(it) {
-  const idx = S.navList.indexOf(it.id);
-  const target = S.navList[idx + 1] || S.navList[idx - 1];
   try { await trashItems([it.id]); } catch (e) { return toast('Couldn’t delete: ' + (e?.message || e)); }
   undoToast(it.pages?.length > 1 ? 'Post moved to Recently deleted' : 'Moved to Recently deleted', [it.id], '#/item/' + it.id);
-  location.hash = target ? '#/item/' + target : '#/';
+  // Back to the page you came from (the item is gone from it). Opened straight from outside Stash: home, with
+  // the deleted item's page taken out of the history so Back doesn't land on "This item is gone".
+  if (inAppNav) history.back(); else location.replace('#/');
 }
 let trashSel = new Set();
 function trashView() {
@@ -4318,9 +4486,14 @@ async function laScan() {
 // Fingerprints these photos, saving every LA_SAVE_EVERY. step() runs after each one; stop() ends it early.
 async function laFill(list, step = () => {}, stop = () => false) {
   let batch = [];
-  const flush = async () => { if (batch.length) { const b = batch; batch = []; await dbPutMeta(b).catch(e => console.warn(e)); } };
+  const gen = libGen;
+  // Only photos still in this library get saved: one erased ("Delete everything") or deleted for good
+  // while this runs must not be written back.
+  const alive = it => libGen === gen && (S.byId.get(it.id) === it || S.trash.includes(it));
+  const flush = async () => { const b = batch.filter(alive); batch = []; if (b.length) await dbPutMeta(b, alive).catch(e => console.warn(e)); };
   for (const it of list) {
-    if (stop() || !S.key) break;
+    if (stop() || !S.key || libGen !== gen) break;
+    if (!alive(it)) continue;
     try { const h = await pictureFingerprint(it.id); it.ph = h || '-'; } catch { it.ph = '-'; }
     batch.push(it); step();
     if (batch.length >= LA_SAVE_EVERY) await flush();
@@ -4519,7 +4692,7 @@ function lookalikeView() {
 function openEdit(it, onSaved) {
   const m = modal(`<h3>Edit</h3>
     <div class="field"><label class="l" for="eTitle">Title</label><input class="input" id="eTitle" value="${esc(it.title)}" autocomplete="off"></div>
-    <div class="field"><span class="l">Tags</span><div data-slot="tags"></div><div class="hint">Press Enter or a comma after each tag. Prefixes like artist:name group tags.</div></div>
+    <div class="field"><span class="l">Tags</span><div data-slot="tags"></div><div class="hint">Press Enter or a comma after each tag. To mark an artist, character or series, tap its button first.</div></div>
     <div class="field"><span class="l">Albums</span><div data-slot="albums"></div></div>
     <div class="field"><span class="l">Shown in</span>${segHTML('eSide', [['nsfw', 'NSFW'], ['sfw', 'SFW']], isSfw(it) ? 'sfw' : 'nsfw')}</div>
     <div class="foot"><button class="btn" data-close>Cancel</button><button class="btn primary" data-save>Save changes</button></div>`);
@@ -4530,7 +4703,9 @@ function openEdit(it, onSaved) {
   $('[data-slot="tags"]', m.el).replaceWith(ti.el);
   $('[data-slot="albums"]', m.el).replaceWith(ai.el);
   const save = async () => {
-    it.title = $('#eTitle', m.el).value.trim(); it.tags = ti.get(); it.albums = ai.get();
+    const title = $('#eTitle', m.el).value.trim(), tags = ti.get(), albums = ai.get();
+    if (minorsHit({ title: title !== it.title ? title : '', tags: tags.filter(t => !it.tags.includes(t)), albums: albums.filter(a => !it.albums.includes(a)) })) return toast(NO_MINORS, 4500);
+    it.title = title; it.tags = tags; it.albums = albums;
     const moved = (side === 'sfw') !== isSfw(it);
     const touched = moved ? markSide([it], side === 'sfw') : [];
     if (!await saveMeta(uniq([it, ...touched]), moved ? `Moved to ${side === 'sfw' ? 'SFW' : 'NSFW'}` : 'Changes saved')) return;
@@ -4546,6 +4721,7 @@ async function renameTag(old) {
   const nv = await promptDialog('Rename tag', old, 'Rename', 'Renaming changes it on every item. If the new name already exists, the two tags merge.');
   if (nv == null) return;
   const n = normTag(nv); if (!n || n === old) return;
+  if (isBlockedTag(n)) return toast(NO_MINORS, 4500);
   const items = S.items.filter(i => i.tags.includes(old));
   items.forEach(i => i.tags = uniq(i.tags.map(t => t === old ? n : t)));
   if (await saveMeta(items, `Renamed on ${plural(items.length, 'item')}`)) location.hash = tagHref(n);
@@ -4560,6 +4736,7 @@ async function renameAlbum(old) {
   const nv = await promptDialog('Rename album', old, 'Rename', 'If an album with the new name exists, the two merge.');
   if (nv == null) return;
   const n = normAlbum(nv); if (!n || n === old) return;
+  if (textBlocked(n)) return toast(NO_MINORS, 4500);
   const items = S.items.filter(i => i.albums.includes(old));
   items.forEach(i => i.albums = uniq(i.albums.map(a => a === old ? n : a)));
   if (await saveMeta(items, 'Album renamed')) location.hash = albumHref(n);
@@ -4638,7 +4815,7 @@ function startUpload(fileList) {
   const total = files.reduce((a, f) => a + f.size, 0);
   const m = modal(`<h3>Add ${plural(files.length, 'file')}</h3>
     <p class="summary">${[nImg ? plural(nImg, 'photo') : '', nVid ? plural(nVid, 'video') : ''].filter(Boolean).join(' and ')}, ${fmtSize(total)}${skipped ? `. Skipping ${plural(skipped, 'file')} that aren’t photos or videos.` : ''}</p>
-    <div class="field"><span class="l">Tags for all of them</span><div data-slot="tags"></div><div class="hint">Press Enter or a comma after each tag. Prefixes like artist:name or character:name get their own section.</div></div>
+    <div class="field"><span class="l">Tags for all of them</span><div data-slot="tags"></div><div class="hint">Press Enter or a comma after each tag. To mark an artist, character or series, tap its button first.</div></div>
     <div class="field"><span class="l">Albums</span><div data-slot="albums"></div></div>
     <div class="field"><span class="l">Add to</span><div class="side-row">${segHTML('upSide', [['nsfw', 'NSFW'], ['sfw', 'SFW']], S.settings.mode)}</div></div>
     <label class="check-row"><input type="checkbox" id="useName" checked> Use the file name as the title</label>
@@ -4686,9 +4863,12 @@ function startUpload(fileList) {
     if (r.dup) out.push(`skipped ${plural(r.dup, 'duplicate')}`);
     if (r.likeSkipped) out.push(`skipped ${plural(r.likeSkipped, 'look-alike')}`);
     if (r.failed) out.push(`${r.failed} failed`);
-    if (out.length) toast(cap(out.join(', ')), 3500);
+    const msg = out.length ? cap(out.join(', ')) : '';
     if (S.key) render({ keep: true });
-    if (NATIVE && r.kept.length && S.settings.offerRemove !== false && NATIVE.canRemoveOriginals?.()) offerRemoveOriginals(r.kept);
+    // The originals can be moved to the phone's trash from a button on this message, instead of a question every time.
+    if (NATIVE && r.kept.length && S.settings.offerRemove !== false && NATIVE.canRemoveOriginals?.())
+      actionToast(msg || `Added ${plural(r.kept.length, 'file')}`, 'Remove originals', () => removeOriginals(r.kept), ORIG_OFFER_MS);
+    else if (msg) toast(msg, 3500);
   };
 }
 async function fingerprint(f) {
@@ -4700,12 +4880,17 @@ async function fingerprint(f) {
 }
 async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = {}) {
   requestPersist();
-  let ok = 0, failed = 0, dup = 0; const base = Date.now(), ids = [], kept = [], held = [], addedFiles = [];
+  let ok = 0, failed = 0, dup = 0, blocked = 0, full = false; const base = Date.now(), ids = [], kept = [], held = [], addedFiles = [];
+  // Every way of adding things ends here, so the minors check lives here too.
+  if (minorsHit({ tags, albums })) { toast(NO_MINORS, 4500); return { ok, failed, dup, blocked: files.length, full, ids, kept, held, addedFiles }; }
+  const gen = libGen;
   const fps = new Set(S.all.map(i => i.fp).filter(Boolean)), sfw = opts.sfw ?? modeSfw();
   // opts.lookalike: hold back photos that look like ones already on that side (see lookalikeDialog)
   const pool = opts.lookalike ? await laPool(sfw, opts.onPrep) : null;
   for (let i = 0; i < files.length; i++) {
+    if (libGen !== gen) { failed += files.length - i; break; } // the library was erased meanwhile
     let f = files[i]; onProgress(i, files.length, f.name);
+    if (textBlocked(f.name)) { blocked++; continue; }
     if (f.load) { try { f = await f.load(); } catch (e) { console.error(e); failed++; continue; } }
     let fp = null;
     try { fp = await fingerprint(f); } catch {}
@@ -4729,7 +4914,10 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
     try {
       const thumbRec = info.thumb ? await sealRec(await info.thumb.arrayBuffer()) : null;
       const fileRec = await encryptFile(f, (a, b) => { if (b > 2) onProgress(i, files.length, f.name, a / b); });
-      await dbPutItem(await encMeta(meta), fileRec, thumbRec);
+      const metaRec = await encMeta(meta);
+      if (libGen !== gen) { failed += files.length - i; break; } // checked right before the write starts
+      await dbPutItem(metaRec, fileRec, thumbRec);
+      if (libGen !== gen) { failed += files.length - i; break; } // erased while writing: not added to the new library
       if (pv) await putPreview(meta.id, pv).catch(() => {});
       addItem(meta);
       if (info.thumb) S.thumbs.set(meta.id, URL.createObjectURL(info.thumb));
@@ -4738,17 +4926,52 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
       ids.push(meta.id); kept.push(f); addedFiles.push(f); ok++;
     } catch (e) {
       console.error(e);
-      if (isQuota(e)) { toast(`Storage is full. Stopped after ${plural(ok, 'file')}.`, 6000); break; }
+      // Storage is full: the rest can't be saved either, so they count as failed (a book cut short isn't "finished").
+      if (isQuota(e)) { toast(`Storage is full. Stopped after ${plural(ok, 'file')}.`, 6000); full = true; failed += files.length - i; break; }
       failed++;
     }
   }
+  if (blocked) toast(`${plural(blocked, 'file')} not saved. ${NO_MINORS}`, 5000);
   changed();
-  return { ok, failed, dup, ids, kept, held, addedFiles };
+  return { ok, failed, dup, blocked, full, ids, kept, held, addedFiles };
 }
 
 /* ================= backup ================= */
+const BK_MIN_PASS = 6;
+// Asks for a password that locks the backup file. Resolves to the password, '' for no password, or null (cancelled).
+function backupPasswordDialog() {
+  return new Promise(res => {
+    let v = null;
+    const m = modal(`<h3>Lock this backup with a password?</h3>
+      <p class="summary">The backup file holds your whole library. With a password, only someone who knows it can open the file. Without one, anyone who gets the file can see everything in it.</p>
+      <div class="field"><label class="l" for="bkP1">Password</label><input class="input" id="bkP1" type="password" autocomplete="new-password"></div>
+      <div class="field"><label class="l" for="bkP2">Type it again</label><input class="input" id="bkP2" type="password" autocomplete="new-password"></div>
+      <div class="hint">Stash can’t recover a forgotten backup password. You only need it to import the backup on another phone or after a reinstall.</div>
+      <div class="err-txt" id="bkErr" role="alert"></div>
+      <div class="foot"><button class="btn" data-nopass>No password</button><button class="btn primary" data-ok>Lock and save</button></div>`, { onClose: () => res(v) });
+    const p1 = $('#bkP1', m.el), p2 = $('#bkP2', m.el), err = $('#bkErr', m.el);
+    const go = () => {
+      if (p1.value.length < BK_MIN_PASS) { err.textContent = `Use at least ${BK_MIN_PASS} characters.`; return p1.focus(); }
+      if (p1.value !== p2.value) { err.textContent = 'The two passwords don’t match.'; return p2.focus(); }
+      v = p1.value; m.close();
+    };
+    $('[data-ok]', m.el).onclick = go;
+    $('[data-nopass]', m.el).onclick = () => { v = ''; m.close(); };
+    p1.onkeydown = e => { if (e.key === 'Enter') p2.focus(); };
+    p2.onkeydown = e => { if (e.key === 'Enter') go(); };
+    setTimeout(() => p1.focus(), 30);
+  });
+}
+// The library's key, locked with the backup password (the same format older password libraries used).
+async function wrapForBackup(raw, pass) {
+  const salt = rnd(16), wiv = rnd(12);
+  const wrapped = await crypto.subtle.encrypt({ name: 'AES-GCM', iv: wiv }, await deriveKEK(pass, salt, ITER), raw);
+  return { salt: toB64(salt), iter: ITER, wiv: toB64(wiv), wrapped: toB64(wrapped) };
+}
 async function exportLibrary() {
   if (!S.all.length) return toast('Nothing to export yet');
+  const pass = S.vault.raw ? await backupPasswordDialog() : '';
+  if (pass == null) return;
   try {
     const [files, thumbs, metas] = await Promise.all([dbAllKV('files'), dbAllKV('thumbs'), dbAllKV('meta')]);
     const parts = [], items = []; let off = 0;
@@ -4757,11 +4980,13 @@ async function exportLibrary() {
       const mr = metas.get(m.id); if (!mr) continue;
       const e = { id: m.id, m: { iv: toB64(mr.iv), d: toB64(mr.data) } };
       const t = thumbs.get(m.id); if (t) e.t = { iv: toB64(t.iv), ...push(new Blob([t.data])) };
+      const o = m.ownThumb && thumbs.get(OWN + m.id); if (o) e.o = { iv: toB64(o.iv), ...push(new Blob([o.data])) };
       const f = files.get(m.id); if (f) e.f = { chunks: f.chunks.map(c => ({ iv: toB64(c.iv), ...push(c.blob) })) };
       items.push(e);
     }
     const v = S.vault;
-    const keyInfo = v.raw ? { rawkey: toB64(v.raw) } : { salt: toB64(v.salt), iter: v.iter, wiv: toB64(v.wiv), wrapped: toB64(v.wrapped) };
+    const keyInfo = !v.raw ? { salt: toB64(v.salt), iter: v.iter, wiv: toB64(v.wiv), wrapped: toB64(v.wrapped) }
+      : pass ? await wrapForBackup(v.raw, pass) : { rawkey: toB64(v.raw) };
     const header = enc.encode(JSON.stringify({ app: 'stash', v: 2, vid: v.vid, ...keyInfo, exported: Date.now(), items }));
     const blob = new Blob(['STASHBK2' + String(header.length).padStart(12, '0'), header, ...parts], { type: 'application/octet-stream' });
     const where = await saveBlob(blob, `backup-${new Date().toISOString().slice(0, 10)}.stash`);
@@ -4783,7 +5008,7 @@ async function importLibrary(file) {
   if (ver === 'STASHBK2' && !same) {
     if (header.rawkey) bkey = await importDEK(fromB64(header.rawkey));
     else {
-      const pass = await promptDialog('Backup password', '', 'Open backup', 'This backup was made while your library had a password. Enter that password to import it.', 'password');
+      const pass = await promptDialog('Backup password', '', 'Open backup', 'This backup is locked with a password. Enter it to import the backup.', 'password');
       if (pass == null) return;
       try { bkey = await unwrapKey(pass, fromB64(header.salt), header.iter, fromB64(header.wiv), fromB64(header.wrapped).buffer); }
       catch { return toast('Wrong password for this backup'); }
@@ -4793,7 +5018,7 @@ async function importLibrary(file) {
   const idx = ver === 'STASHBK1' ? new Map((header.index || []).map(e => [e.id, e])) : null;
   const m = modal(`<h3>Importing backup</h3><div class="progress"><i></i></div><div class="hint" id="impTxt">Starting…</div>`);
   m.ov.dataset.busy = '1';
-  let added = 0, skipped = 0;
+  let added = 0, skipped = 0, refused = 0; const bad = new Set(), kids = [];
   await busy(async () => {
     try {
       for (let k = 0; k < list.length; k++) {
@@ -4804,6 +5029,7 @@ async function importLibrary(file) {
         if (ver === 'STASHBK1') {
           meta = clean({ ...e });
           if (S.byId.has(meta.id)) { skipped++; continue; }
+          if (minorsHit(meta) || bad.has(meta.parent)) { refused++; bad.add(meta.id); continue; }
           const ix = idx.get(meta.id) || {};
           if (ix.t) thumbRec = await sealRec(await slice(ix.t[0], ix.t[1]).arrayBuffer());
           if (ix.f) fileRec = await encryptFile(slice(ix.f[0], ix.f[1]));
@@ -4811,10 +5037,15 @@ async function importLibrary(file) {
           const miv = fromB64(e.m.iv), mct = fromB64(e.m.d).buffer;
           meta = clean(await decMeta({ iv: miv, data: mct }, same ? S.key : bkey)); delete meta.deleted;
           if (S.byId.has(meta.id)) { skipped++; continue; }
+          if (minorsHit(meta) || bad.has(meta.parent)) { refused++; bad.add(meta.id); continue; }
           if (e.t) {
             const iv = fromB64(e.t.iv), ct = await slice(e.t.off, e.t.len).arrayBuffer();
             thumbRec = same ? { iv, data: ct } : await sealRec(await unseal(bkey, iv, ct));
           }
+          if (e.o) {
+            const iv = fromB64(e.o.iv), ct = await slice(e.o.off, e.o.len).arrayBuffer();
+            await putThumbRec(OWN + meta.id, same ? { iv, data: ct } : await sealRec(await unseal(bkey, iv, ct)));
+          } else delete meta.ownThumb;
           if (e.f) {
             const chunks = [];
             for (const c of e.f.chunks) {
@@ -4828,13 +5059,16 @@ async function importLibrary(file) {
         meta.hasThumb = !!thumbRec;
         metaRec = await encMeta(meta);
         await dbPutItem(metaRec, fileRec, thumbRec);
-        addItem(meta); added++;
+        addItem(meta); added++; if (meta.parent) kids.push(meta);
         if (S.trash.some(t => t.id === meta.id)) { S.trash = S.trash.filter(t => t.id !== meta.id); updateTrashLink(); }
       }
+      // Pages of a refused post that came before it in the file go too.
+      const orphans = kids.filter(k => bad.has(k.parent));
+      if (orphans.length) { await dbDelete(orphans.map(k => k.id)); setItems(S.all.filter(i => !orphans.includes(i))); added -= orphans.length; }
     } catch (err) { console.error(err); toast(isQuota(err) ? 'Storage is full; import stopped early' : 'Import stopped: ' + (err?.message || err), 6000); }
   });
   changed(); delete m.ov.dataset.busy; m.close();
-  toast(`Imported ${plural(added, 'item')}${skipped ? `, ${skipped} already here` : ''}`);
+  toast(`Imported ${plural(added, 'item')}${skipped ? `, ${skipped} already here` : ''}${refused ? `. ${plural(refused, 'item')} not imported: ${NO_MINORS}` : ''}`, refused ? 8000 : 2800);
   if (S.key) render();
 }
 
@@ -4893,14 +5127,14 @@ const SET_SECTION = {
 let setTab = 'look';
 function openSettings() {
   const st = S.settings, total = S.all.reduce((a, i) => a + (i.size || 0), 0);
-  const m = modal(`<h3>Settings</h3>
-    <nav class="set-tabs" aria-label="Settings sections">${segHTML('setTabs', SET_TABS, setTab)}</nav>
+  const m = modal(`<div class="set-top"><div class="set-title"><h3>Settings</h3><button type="button" class="icon-btn" data-close aria-label="Close settings">${I.x}</button></div>
+    <nav class="set-tabs" aria-label="Settings sections">${segHTML('setTabs', SET_TABS, setTab)}</nav></div>
     <div class="field"><span class="l">Style</span>${segHTML('themeSeg', [['crimson', 'Crimson'], ['amoled', 'AMOLED black'], ['azure', 'Azure'], ['midnight', 'Midnight']], st.theme)}
       <div class="hint">Crimson is dark gray with tall covers. AMOLED black uses a true black background. Azure and Midnight use rounded tiles with titles underneath.</div></div>
     <div class="field"><span class="l">Home page</span>${segHTML('homeSeg', [['library', 'Library grid'], ['rows', 'Rows']], st.homeStyle === 'rows' ? 'rows' : 'library')}
-      <div class="hint">Library grid shows everything by date added. Rows shows the rows below above your library.</div>
-      <div class="hint" style="margin:10px 0 8px">Rows to show, in the order you like:</div>
-      <div id="homeRows"></div></div>
+      <div class="hint">Library grid shows everything by date added. Rows shows rows like Continue watching, For you and Favorites above your library; you pick which ones once Rows is on.</div>
+      <div id="homeRowsBox"${st.homeStyle === 'rows' ? '' : ' hidden'}><div class="hint" style="margin:10px 0 8px">Rows to show, in the order you like:</div>
+      <div id="homeRows"></div></div></div>
     <div class="field"><span class="l">Background picture</span>
       <div class="btn-row" style="margin-top:0"><button class="btn" id="bgBtn" type="button">${I.image}Choose a picture</button><button class="btn ghost" id="bgRemove" type="button"${S.bgUrl ? '' : ' hidden'}>Remove</button></div>
       <div class="hint">Or open any photo in your stash and press “Set as background”.</div>
@@ -4951,11 +5185,12 @@ function openSettings() {
       ${NATIVE ? `<div class="muted" style="margin-bottom:10px">Stash for Android ${esc(NATIVE.version())}</div>
       <label class="check-row"><input type="checkbox" id="recentsChk"${NATIVE.getHideRecents() ? ' checked' : ''}> Hide what’s on screen in the recent apps view</label>
       ${NATIVE.hideRecentsBlocksScreenshots() ? '<div class="hint" style="margin:-6px 0 14px">On this Android version this also blocks screenshots in Stash.</div>' : ''}
-      ${NATIVE.canRemoveOriginals() ? `<label class="check-row"><input type="checkbox" id="origChk"${st.offerRemove !== false ? ' checked' : ''}> After adding files, offer to remove the originals from the gallery</label>` : ''}`
+      ${NATIVE.canRemoveOriginals() ? `<label class="check-row"><input type="checkbox" id="origChk"${st.offerRemove !== false ? ' checked' : ''}> After adding files, show a “Remove originals” button to move them from the gallery to the phone’s trash</label>` : ''}`
       : isInstalled() ? '<div>Stash is installed as an app on this device.</div>' : `<button class="btn" id="installBtn" type="button">${I.download}Install as app</button>
       <div class="hint">Gives Stash its own icon on your home screen, opens it without Chrome’s address bar and lets it work offline. Your library stays the same.</div>`}</div>
     <div class="field"><span class="l">Danger zone</span><button class="btn danger" id="wipeBtn">${I.trash}Delete everything</button></div>
-    <div class="foot"><button class="btn primary" data-close>Done</button></div>`);
+    <div class="foot set-foot"><button class="btn primary" data-close>Done</button></div>`);
+  m.el.classList.add('settings');
   const showTab = tab => {
     setTab = tab;
     $$('.field', m.el).forEach(f => { f.hidden = (SET_SECTION[$('.l', f)?.textContent] || 'app') !== tab; });
@@ -5002,7 +5237,7 @@ function openSettings() {
   $('#bgDim', m.el).oninput = e => { st.bgDim = +e.target.value; $('#bgDimV', m.el).textContent = st.bgDim + '%'; saveSettings(); applySettings(); };
   $('#bgBlur', m.el).oninput = e => { st.bgBlur = +e.target.value; $('#bgBlurV', m.el).textContent = st.bgBlur + 'px'; saveSettings(); applySettings(); };
   bindSeg(m.el, 'pagingSeg', v => { st.paging = v; saveSettings(); rerenderList({ fresh: true }); });
-  bindSeg(m.el, 'homeSeg', v => { st.homeStyle = v; saveSettings(); if (!parseHash().parts[0]) render({ fresh: true }); });
+  bindSeg(m.el, 'homeSeg', v => { st.homeStyle = v; saveSettings(); $('#homeRowsBox', m.el).hidden = v !== 'rows'; if (!parseHash().parts[0]) render({ fresh: true }); });
   bindSeg(m.el, 'turnSeg', v => { st.turn = v; st.turnPicked = true; saveSettings(); });
   $('#perSel', m.el).onchange = e => { st.perPage = +e.target.value; saveSettings(); rerenderList({ fresh: true }); };
   $('#apChk', m.el).onchange = e => { st.autoplay = e.target.checked; saveSettings(); };
@@ -5368,6 +5603,8 @@ function followList(ok, startId) {
   const k = S.navList.indexOf(startId); if (k < 0) return null;
   return [...S.navList.slice(k + 1), ...S.navList.slice(0, k)].filter(id => ok(S.byId.get(id)));
 }
+// Always leaves at least 3 to pick from (when there are 4 or more), so a small library never falls into a fixed order.
+const noRepeat = (max, n) => Math.max(1, Math.min(max, n - 3));
 function shuffled(list) {
   const a = list.slice(), r = new Uint32Array(a.length || 1);
   crypto.getRandomValues(r);
@@ -5407,19 +5644,23 @@ function feedTeardown() {
   FEED.urls.forEach(u => URL.revokeObjectURL(u)); FEED.urls.clear(); FEED.pending.clear();
   if (document.fullscreenElement) document.exitFullscreen?.().catch(() => {});
   if (!S.key) return;
-  if (go) location.hash = '#/item/' + go;
+  if (go) location.hash = go.startsWith('#') ? go : '#/item/' + go;
   else render({ keep: true });
 }
 // The next video for the feed. When every video has been shown, it starts a new shuffle.
+// The last few shown are skipped, but never so many that only one or two are left to pick: on a small library, skipping almost all
+// of it would leave one choice each time and the same order would come round again and again.
 function feedNextId() {
-  for (let tries = 0; tries < 2; tries++) {
+  if (FEED.follow) { // following a search or a tag: it ends with the list
     while (FEED.pool.length) { const id = FEED.pool.shift(); if (feedOk(S.byId.get(id))) return id; }
-    if (FEED.follow) return null; // following a search or a tag: it ends with the list
-    const all = feedVideos(); if (all.length < 2) return null;
-    const recent = new Set(FEED.ids.slice(-Math.min(FEED_NO_REPEAT, all.length - 1)));
-    FEED.pool = shuffled(all.filter(id => !recent.has(id)));
+    return null;
   }
-  return null;
+  const all = feedVideos(); if (all.length < 2) return null;
+  const have = new Set(all), recent = new Set(FEED.ids.slice(-noRepeat(FEED_NO_REPEAT, all.length)));
+  FEED.pool = FEED.pool.filter(id => have.has(id));
+  let k = FEED.pool.findIndex(id => !recent.has(id));
+  if (k < 0) { FEED.pool = shuffled(all); k = FEED.pool.findIndex(id => !recent.has(id)); }
+  return k < 0 ? null : FEED.pool.splice(k, 1)[0];
 }
 function feedMore() {
   const list = $('.fd-list', feedEl());
@@ -5432,8 +5673,7 @@ function feedMore() {
 function feedSlide(k) {
   const id = FEED.ids[k], it = S.byId.get(id), sl = document.createElement('section');
   sl.className = 'fd-slide'; sl.dataset.i = k; sl.dataset.id = id;
-  const artist = it.tags.find(t => t.startsWith('artist:'));
-  const tags = it.tags.filter(t => !t.includes(':')).slice(0, 4);
+  const caps = capTagsHTML(it);
   const canShare = !!(NATIVE?.saveBeginTo || navigator.canShare);
   sl.innerHTML = `<img class="fd-poster" alt="">
     <div class="fd-msg" hidden></div>
@@ -5443,7 +5683,7 @@ function feedSlide(k) {
       ${canShare ? `<button type="button" data-fa="share" aria-label="Share">${I.share}</button>` : ''}
       <button type="button" data-fa="more" aria-label="More options">${I.dots}</button>
     </div>
-    <div class="fd-info"><b>${esc(it.title || 'Untitled')}</b>${artist ? `<span>${I.user}${esc(splitNs(artist)[1])}</span>` : ''}${tags.length ? `<small>${tags.map(t => '#' + esc(t)).join(' ')}</small>` : ''}</div>
+    <div class="fd-info"><b>${esc(it.title || 'Untitled')}</b>${caps ? `<div class="cap-line">${caps}</div>` : ''}</div>
     <div class="fd-bar" aria-hidden="true"><i></i></div>`;
   thumbURL(id).then(u => { if (u && sl.isConnected) $('.fd-poster', sl).src = u; }).catch(() => {});
   return sl;
@@ -5596,6 +5836,8 @@ function bindFeed() {
   list.addEventListener('click', e => {
     if (feedSheetOpen()) { clearTimeout(clickT); clickT = null; if (!feedSheetJustOpened()) feedSheet(false); return; }
     const sl = e.target.closest('.fd-slide'); if (!sl) return;
+    const cap = e.target.closest('.cap-t');
+    if (cap) { e.preventDefault(); clearTimeout(clickT); clickT = null; FEED.goto = cap.getAttribute('href'); closeFeed(); return; }
     const b = e.target.closest('[data-fa]');
     if (b) {
       if (b.dataset.fa === 'fav') feedFav(sl);
@@ -5606,7 +5848,7 @@ function bindFeed() {
     if (e.target.closest('.fd-bar')) return;
     // One tap pauses or plays. The second tap of a double tap is the video's own (skip 10 s or the menu).
     if (clickT) { clearTimeout(clickT); clickT = null; return; }
-    clickT = setTimeout(() => { clickT = null; if (!feedSheetOpen()) feedToggle(sl); }, 260);
+    clickT = setTimeout(() => { clickT = null; if (FEED.open && sl.isConnected && !feedSheetOpen()) feedToggle(sl); }, 260);
   });
   // The thin line at the bottom: tap or drag along it to jump in the video.
   list.addEventListener('pointerdown', e => {
@@ -5679,7 +5921,7 @@ function plTeardown(silent = false) {
   list.innerHTML = ''; plSheet(false);
   plEl().hidden = true; document.body.classList.remove('pl-open');
   if (silent || !S.key) return;
-  if (go) location.hash = '#/item/' + go;
+  if (go) location.hash = go.startsWith('#') ? go : '#/item/' + go;
   else render({ keep: true });
 }
 // The next photo, picked at random from the ones not shown yet this round, never one of the last few shown
@@ -5690,7 +5932,7 @@ function plNextId(shown) {
     return null;
   }
   const all = plPhotos(); if (all.length < 2) return null;
-  const have = new Set(all), recent = new Set(shown.slice(-Math.min(PL_NO_REPEAT, all.length - 1)));
+  const have = new Set(all), recent = new Set(shown.slice(-noRepeat(PL_NO_REPEAT, all.length)));
   PL.pool = PL.pool.filter(id => have.has(id));
   let pick = PL.pool.filter(id => !recent.has(id));
   if (!pick.length) { PL.pool = all.slice(); pick = PL.pool.filter(id => !recent.has(id)); }
@@ -5732,11 +5974,11 @@ function plViewed(c) {
 function plCard(id) {
   const it = S.byId.get(id), pages = plPages(it), first = pages[0] || it;
   const r = first.width && first.height ? first.height / first.width : 1, tall = r > PL_TALL;
-  const artist = it.tags.find(t => t.startsWith('artist:')), tags = it.tags.filter(t => !t.includes(':')).slice(0, 4);
+  const caps = capTagsHTML(it);
   const canShare = !!(NATIVE?.saveBeginTo || navigator.canShare);
   const c = document.createElement('article');
   c.className = 'pl-card'; c.dataset.id = id;
-  c.innerHTML = `<header class="pl-h"><b>${esc(it.title || 'Untitled')}</b>${artist || tags.length ? `<small>${artist ? `${I.user}<span class="pl-artist">${esc(splitNs(artist)[1])}</span>` : ''}${tags.length ? `<span class="pl-tags">${tags.map(t => '#' + esc(t)).join(' ')}</span>` : ''}</small>` : ''}</header>
+  c.innerHTML = `<header class="pl-h"><b>${esc(it.title || 'Untitled')}</b>${caps ? `<div class="cap-line">${caps}</div>` : ''}</header>
     <div class="pl-media${tall ? ' tall' : ''}" style="aspect-ratio:${(1 / Math.min(r, PL_TALL)).toFixed(4)}">
       <div class="pl-pages">${pages.map(p => `<div class="pl-page" data-pid="${esc(p.id)}"><img class="pl-thumb" alt="" draggable="false"></div>`).join('')}</div>
       ${pages.length > 1 ? `<span class="pl-count">1/${pages.length}</span>` : ''}
@@ -5884,6 +6126,8 @@ function bindPhotoList() {
   list.addEventListener('click', e => {
     if (plSheetOpen()) { clearTimeout(PL.clickT); PL.clickT = null; if (!plSheetJustOpened()) plSheet(false); return; }
     const c = e.target.closest('.pl-card'); if (!c) return;
+    const cap = e.target.closest('.cap-t');
+    if (cap) { e.preventDefault(); clearTimeout(PL.clickT); PL.clickT = null; PL.goto = cap.getAttribute('href'); closePhotoList(); return; }
     const b = e.target.closest('[data-pa]');
     if (b) {
       if (b.dataset.pa === 'fav') plFav(c);
@@ -6114,7 +6358,8 @@ function stopPreview() {
 const AUTO_CAP = 250 * 1048576, AUTO_KEEP = 320 * 1048576, AUTO_MAX = 2;
 const AUTO = { io: null, near: new Set(), watched: new Set(), cards: new Map(), blobs: new Map(), pending: new Map(), pos: new Map(), bad: new Set(), force: null, timer: 0, blocked: false, queue: Promise.resolve(), making: false, fq: [] };
 const autoOn = () => S.settings.animThumbs !== false && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-const autoBlocked = () => !S.key || LB.open || RD.open || BW.open || document.hidden;
+// Previews in the grid pause while something full-screen covers it (the viewer, the reader, Explore, the feed, the photo list).
+const autoBlocked = () => !S.key || LB.open || RD.open || BW.open || FEED.open || PL.open || document.hidden;
 function watchAutoPreviews(root = document) {
   for (const c of AUTO.watched) if (!c.isConnected) { AUTO.io?.unobserve(c); AUTO.watched.delete(c); AUTO.near.delete(c); autoStop(c); }
   if (!autoOn()) return;
@@ -6782,8 +7027,12 @@ function chipDialog(title, source, limitTo, ok) {
   });
 }
 
+// The kinds a tag can be marked as, with the buttons above the tag box. "Artist" then "yuki" adds artist:yuki.
+const TAG_KINDS = [['', 'Tag'], ['artist', 'Artist'], ['character', 'Character'], ['series', 'Series']];
 function chipInput({ values = [], source = 'tags', placeholder = '', limitTo = null }) {
-  const norm = source === 'tags' ? normTag : normAlbum;
+  const isTags = source === 'tags', norm = isTags ? normTag : normAlbum;
+  const nameOf = n => (isTags ? splitNs(n)[1] : n).toLowerCase();
+  let kind = '';
   const vals = uniq(values.map(norm), v => v.toLowerCase());
   const root = document.createElement('div'); root.className = 'chips';
   const input = document.createElement('input');
@@ -6791,33 +7040,60 @@ function chipInput({ values = [], source = 'tags', placeholder = '', limitTo = n
   input.setAttribute('enterkeyhint', 'enter');
   const sug = document.createElement('div'); sug.className = 'suggest';
   let hl = -1, opts = [];
-  const pool = () => limitTo || [...(source === 'tags' ? counts().tags : counts().albums).entries()];
+  const pool = () => limitTo || [...(isTags ? counts().tags : counts().albums).entries()];
+  const kinds = isTags && !limitTo ? document.createElement('div') : null;
+  const kindLabel = () => TAG_KINDS.find(([k]) => k === kind)[1].toLowerCase();
+  function setKind(k) {
+    kind = k;
+    $$('[data-kind]', kinds).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kind === k)));
+    draw();
+    if (document.activeElement === input) show();
+  }
+  if (kinds) {
+    kinds.className = 'kinds'; kinds.setAttribute('role', 'group'); kinds.setAttribute('aria-label', 'Kind of tag');
+    kinds.innerHTML = '<span>Add as</span>' + TAG_KINDS.map(([k, l]) => `<button type="button" data-kind="${k}" aria-pressed="${k === ''}">${l}</button>`).join('');
+    kinds.addEventListener('mousedown', e => { if (e.target.closest('[data-kind]')) e.preventDefault(); }); // keeps what's typed in the box
+    kinds.addEventListener('click', e => { const b = e.target.closest('[data-kind]'); if (b) { setKind(b.dataset.kind); input.focus(); } });
+  }
   function draw() {
     $$('.chip', root).forEach(c => c.remove());
     vals.forEach((v, i) => {
+      const [ns, name] = isTags ? splitNs(v) : ['', v];
       const c = document.createElement('span'); c.className = 'chip';
-      c.innerHTML = `<span>${esc(v)}</span><button type="button" aria-label="Remove ${esc(v)}">×</button>`;
+      if (ns) c.dataset.ns = ns;
+      c.innerHTML = `${ns ? `<small class="k">${esc(ns)}</small>` : ''}<span title="${esc(v)}">${esc(name)}</span><button type="button" aria-label="Remove ${esc(v)}">×</button>`;
       c.querySelector('button').onclick = e => { e.stopPropagation(); vals.splice(i, 1); draw(); input.focus(); };
       root.insertBefore(c, input);
     });
-    input.placeholder = vals.length ? '' : placeholder;
+    input.placeholder = kind ? `Type the ${kindLabel()}’s name` : vals.length ? '' : placeholder;
   }
   function add(raw) {
-    String(raw).split(',').map(norm).filter(Boolean).forEach(v => {
+    const k = kind;
+    String(raw).split(',').map(x => x.trim()).filter(Boolean).map(x => norm(k && !x.includes(':') ? k + ':' + x : x)).filter(Boolean).forEach(v => {
       if (limitTo && !limitTo.some(([n]) => n === v)) return;
+      if (!limitTo && (source === 'tags' ? isBlockedTag(v) : textBlocked(v))) { toast(NO_MINORS, 4500); return; }
       if (!vals.some(x => x.toLowerCase() === v.toLowerCase())) vals.push(v);
     });
-    input.value = ''; draw(); hide();
+    input.value = '';
+    if (k) setKind(''); // back to a plain tag after each one, so the next word isn't marked by mistake
+    draw(); hide();
   }
   function show() {
     const t = input.value.trim().toLowerCase();
     const have = new Set(vals.map(v => v.toLowerCase()));
-    opts = pool().filter(([n]) => !have.has(n.toLowerCase()) && (!t || n.toLowerCase().includes(t)))
-      .sort((a, b) => (b[0].toLowerCase().startsWith(t) - a[0].toLowerCase().startsWith(t)) || b[1] - a[1] || a[0].localeCompare(b[0]))
+    // A plain word is matched against the name only ("art" doesn't list every artist); with a kind picked, only that kind.
+    const fits = n => {
+      const l = n.toLowerCase();
+      if (kind && splitNs(l)[0] !== kind) return false;
+      return !t || (t.includes(':') ? l.includes(t) : nameOf(l).includes(t));
+    };
+    opts = pool().filter(([n]) => !have.has(n.toLowerCase()) && fits(n))
+      .sort((a, b) => (nameOf(b[0]).startsWith(t) - nameOf(a[0]).startsWith(t)) || b[1] - a[1] || a[0].localeCompare(b[0]))
       .slice(0, 8);
     hl = -1;
     if (!opts.length) return hide();
-    sug.innerHTML = opts.map(([n, c], i) => `<div data-i="${i}"><span>${esc(n)}</span><small>${c}</small></div>`).join('');
+    const label = n => { const [ns, name] = isTags ? splitNs(n) : ['', n]; return (ns ? `<em class="k" data-ns="${esc(ns)}">${esc(ns)}</em>` : '') + esc(name); };
+    sug.innerHTML = opts.map(([n, c], i) => `<div data-i="${i}"><span>${label(n)}</span><small>${c}</small></div>`).join('');
     sug.classList.add('open');
   }
   function hide() { sug.classList.remove('open'); hl = -1; }
@@ -6842,7 +7118,9 @@ function chipInput({ values = [], source = 'tags', placeholder = '', limitTo = n
   sug.addEventListener('mousedown', e => { e.preventDefault(); const d = e.target.closest('[data-i]'); if (d) { add(opts[+d.dataset.i][0]); input.focus(); } });
   root.addEventListener('mousedown', e => { if (e.target === root) { e.preventDefault(); input.focus(); } });
   root.append(input, sug); draw();
-  return { el: root, input, get: () => { if (input.value.trim()) add(input.value); return [...vals]; } };
+  let el = root;
+  if (kinds) { el = document.createElement('div'); el.className = 'chipbox'; el.append(kinds, root); }
+  return { el, input, get: () => { if (input.value.trim()) add(input.value); return [...vals]; } };
 }
 
 /* ================= global events ================= */
@@ -6890,7 +7168,15 @@ function bindGlobal() {
     if (!arcs.length) return toast('Pick CBZ or ZIP files (and Kotatsu’s index.json if there is one)', 4500);
     startArchiveImport(arcs, jsons, f.length - arcs.length - jsons.length);
   };
-  $('#bulk').addEventListener('click', e => { const b = e.target.closest('[data-bulk]'); if (b && !b.disabled) bulk(b.dataset.bulk); });
+  $$('#bulk [data-ic]').forEach(b => b.insertAdjacentHTML('afterbegin', I[b.dataset.ic]));
+  $('#bulk').addEventListener('click', e => {
+    const b = e.target.closest('[data-bulk]'); if (!b || b.disabled) return;
+    const a = b.dataset.bulk;
+    if (a === 'more') { bulkMore($('#bulk .bk-more').hidden); return; }
+    bulkMore(false);
+    bulk(a);
+  });
+  document.addEventListener('click', e => { if (!e.target.closest('#bulk')) bulkMore(false); });
 
   document.addEventListener('click', e => {
     const fav = e.target.closest('[data-fav]');
@@ -6964,7 +7250,7 @@ function bindGlobal() {
     if (files.length && files.every(f => /\.stash$/i.test(f.name))) importLibrary(files[0]);
     else if (files.length) startUpload(files);
   });
-  window.addEventListener('hashchange', () => render());
+  window.addEventListener('hashchange', () => { inAppNav = true; render(); });
   const toTop = $('#toTop'); toTop.innerHTML = I.up;
   toTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   window.addEventListener('scroll', () => document.body.classList.toggle('show-top', window.scrollY > 1400 && !!S.key), { passive: true });
