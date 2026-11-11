@@ -432,6 +432,22 @@ input[type="range"]{accent-color:var(--accent);flex:1;min-width:120px}
 .lib-seg{display:flex;padding:4px;border-radius:14px;background:var(--panel);margin-bottom:12px}
 .lib-seg a{flex:1;height:36px;border-radius:10px;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-decoration:none}
 .lib-seg a.on{background:var(--strong);color:var(--bg)}
+@media (max-width:420px){.lib-seg a{font-size:12px;letter-spacing:-.01em}}
+/* the Tools page (the last button of the phone's bottom bar) */
+.tl-list{display:flex;flex-direction:column;gap:10px;max-width:640px}
+.tl-sec{font-size:13px;font-weight:800;color:var(--muted);margin:18px 2px 0}
+.tl-card{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border:0;border-radius:14px;background:var(--panel);color:var(--text);font:inherit;text-align:left;text-decoration:none;cursor:pointer}
+.tl-card:hover{background:var(--panel2)}
+.tl-ic{width:40px;height:40px;border-radius:12px;background:var(--panel2);color:var(--strong);display:grid;place-items:center;flex:none}
+.tl-ic svg{width:20px;height:20px}
+.tl-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.tl-b b{font-size:15px;color:var(--strong)}
+.tl-b span{font-size:13px;line-height:1.4;color:var(--muted)}
+.tl-fp{flex-direction:column;align-items:stretch;cursor:default}
+.tl-fp:hover{background:var(--panel)}
+.tl-row{display:flex;align-items:center;gap:14px}
+.tl-fp .progress{margin:2px 0 0}
+.tl-fp .btn{align-self:flex-start}
 .lib-meta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:6px}
 .lib-meta>span{flex:1;min-width:0}
 .lib-meta b{color:var(--strong)}
@@ -543,7 +559,7 @@ body:not([data-theme="azure"]) .item-page .tag[data-ns=""] .n,body:not([data-the
   /* the item page is a sheet with its own Back button; the floating bar only covered its tags */
   body.on-item .tabbar{display:none}
   body.on-item #toasts{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
-  .links a[data-v="doujinshi"],.links a[data-v="albums"],.links a[data-v="explore"]{display:none}
+  .links a[data-v="doujinshi"],.links a[data-v="albums"],.links a[data-v="explore"],.links a[data-v="tools"]{display:none}
   body.on-explore .topbar .search,body.on-explore .topbar .links{display:none}
   main{padding-bottom:120px}
   #bulk{bottom:env(safe-area-inset-bottom,0px)}
@@ -687,6 +703,14 @@ button.card{border:0;background:none;padding:0;margin:0;text-align:left;color:in
 .la-h .lnk{margin-left:auto;border:0;background:none;padding:6px 0;font:inherit;font-size:13px;font-weight:700;color:var(--accent);cursor:pointer}
 .la-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
 .la-row .caption{font-size:12px;color:var(--muted);font-weight:600}
+/* adding a photo that looks like one already in the stash */
+.lk-list{display:flex;flex-direction:column;gap:14px;max-height:55vh;overflow-y:auto;margin:4px 0 14px}
+.lk-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.lk-row:last-child{border-bottom:0;padding-bottom:0}
+.lk-row figure{margin:0;min-width:0}
+.lk-row img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;background:var(--panel2);border-radius:8px}
+.lk-row figcaption{font-size:12px;line-height:1.35;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.lk-row .check-row{grid-column:1/-1;margin:2px 0 0}
 .tcard .badge.la-best{background:var(--accent);color:var(--on-accent);text-shadow:none;padding:2px 8px}
 .la-open{position:absolute;top:4px;right:4px;z-index:3;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center}
 .la-open svg{width:18px;height:18px}
@@ -765,6 +789,10 @@ body.feed-open .tabbar,body.feed-open .to-top{display:none}
 body.feed-open .overlay{z-index:140}
 .fd-list{position:absolute;inset:0;overflow-y:scroll;overscroll-behavior:contain;scroll-snap-type:y mandatory;scrollbar-width:none}
 .fd-list::-webkit-scrollbar{display:none}
+/* press and hold a video: 2× until you let go */
+.hold-fast{position:absolute;top:calc(70px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:5px;padding:5px 13px;border-radius:999px;background:rgba(0,0,0,.62);color:#fff;font-weight:800;font-size:14px;pointer-events:none}
+.hold-fast svg{width:16px;height:16px}
+video{-webkit-touch-callout:none}
 .fd-slide{position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;background:#000}
 .fd-poster,.fd-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .fd-poster{filter:brightness(.8)}
@@ -939,6 +967,7 @@ body.bw-open .toast{padding:9px 14px;font-size:12.5px;max-width:calc(100vw - 24p
       <a href="#/tags" data-v="tags">Tags</a>
       <a href="#/favorites" data-v="favorites">Favorites</a>
       <a href="#/trash" data-v="trash" id="trashLink" hidden>Recently deleted</a>
+      <a href="#/tools" data-v="tools">Tools</a>
     </nav>
     <div class="actions">
       <button class="upload-btn" id="uploadBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 16v2.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V16"/></svg><span>Upload</span></button>
@@ -957,7 +986,7 @@ body.bw-open .toast{padding:9px 14px;font-size:12.5px;max-width:calc(100vw - 24p
   <a href="#/doujinshi" data-v="doujinshi" aria-label="Doujinshi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6A1.5 1.5 0 0 1 5 4.5h5.5A1.5 1.5 0 0 1 12 6v14a2 2 0 0 0-2-2H3.5zM20.5 6A1.5 1.5 0 0 0 19 4.5h-5.5A1.5 1.5 0 0 0 12 6v14a2 2 0 0 1 2-2h6.5z"/></svg><span>Doujinshi</span></a>
   <button type="button" class="tb-add" id="tbUpload" aria-label="Upload"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
   <a href="#/explore" data-v="explore" aria-label="Explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg><span>Explore</span></a>
-  <a href="#/albums" data-v="albums" aria-label="Albums"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H9l2 2.2h7.5A2.5 2.5 0 0 1 21 9.7v7.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/></svg><span>Albums</span></a>
+  <a href="#/tools" data-v="tools" aria-label="Tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3l-5.6 5.6a1.5 1.5 0 0 0 2.1 2.1l5.6-5.6a4 4 0 0 0 5.3-5.3l-2.4 2.4-2.1-.5-.5-2.1z"/></svg><span>Tools</span></a>
 </nav>
 
 <div id="bulk" role="toolbar" aria-label="Selection">
@@ -1725,7 +1754,8 @@ function render(opts = {}) {
   stopPreview();
   if (S.selecting && (!LIST_VIEWS.has(view) || (path !== S.lastPath && !opts.keep))) setSelecting(false);
   S.lastPath = path;
-  $$('.links a, .tabbar a').forEach(a => a.classList.toggle('active', a.dataset.v === view || (a.dataset.v === 'albums' && view === 'album')));
+  $$('.links a, .tabbar a').forEach(a => a.classList.toggle('active', a.dataset.v === view || (a.dataset.v === 'albums' && view === 'album')
+    || (a.dataset.v === '' && (view === 'albums' || view === 'album') && !!a.closest('.tabbar')))); // albums are a Library tab on phones
   document.body.classList.toggle('on-item', view === 'item');
   document.body.classList.toggle('on-explore', view === 'explore');
   document.body.classList.remove('bar-hide');
@@ -1765,6 +1795,7 @@ function render(opts = {}) {
     case 'explore': exploreView(); break;
     case 'trash': trashView(); break;
     case 'lookalike': lookalikeView(); break;
+    case 'tools': toolsView(); break;
     case 'item': itemView(parts[1], token, opts); break;
     case 'random': {
       if (!tops.length) { location.replace('#/'); return; }
@@ -1907,6 +1938,11 @@ function listView({ kind, name, title, items, page, fixed = false, rank = false,
 /* ---------- home: library grid ---------- */
 // The home page as one gallery: everything newest first, in square tiles, grouped by when it was added.
 const LIB_SHOW = [['', 'All'], ['photos', 'Photos'], ['videos', 'Videos'], ['doujinshi', 'Doujinshi']];
+// The Library's tabs. Albums (since 1.20 here instead of in the bottom bar) opens its own page, which shows these too.
+function libSegHTML(active, hrefOf = v => '#/' + (v ? '?show=' + v : '')) {
+  const tabs = [...LIB_SHOW.map(([v, l]) => [hrefOf(v), l, v === active]), ['#/albums', 'Albums', active === 'albums']];
+  return `<nav class="lib-seg" aria-label="Show">${tabs.map(([h, l, on]) => `<a href="${esc(h)}"${on ? ' class="on" aria-current="page"' : ''}>${l}</a>`).join('')}</nav>`;
+}
 function dateGroup(ts) {
   const now = new Date(), day = 864e5, start = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(), d = new Date(ts || 0);
   if (ts >= start) return 'Today';
@@ -1951,7 +1987,7 @@ function libraryView(q, tops) {
       <a class="lib-pill" href="${esc(orderHref)}" title="${old ? 'Showing oldest first. Tap for newest first' : 'Showing newest first. Tap for oldest first'}">${old ? 'Oldest' : 'Newest'}</a>
       <button class="lib-pill${nf ? ' on' : ''}" type="button" data-act="filters">Filters${nf ? ` · ${nf}` : ''}</button>
       <button class="lib-ic${S.selecting ? ' on' : ''}" type="button" data-act="select" aria-label="Select">${I.check}</button></div>
-    <nav class="lib-seg" aria-label="Show">${LIB_SHOW.map(([v, l]) => `<a href="${esc(segHref(v))}"${v === show ? ' class="on" aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
+    ${libSegHTML(show, segHref)}
     ${sorted.length ? `<div id="libBody">${libChunk(sorted, 0, shown, null)}</div>${shown < sorted.length ? '<div class="more" id="more"></div>' : ''}`
       : `<div class="empty"><h2>${nf ? 'Nothing matches these filters' : 'Nothing here yet'}</h2><p>${nf ? 'Loosen them or clear them to see more.' : 'Things you add will show up here.'}</p>${nf ? '<button class="btn primary" data-act="clearf">Clear filters</button>' : ''}</div>`}
   </div>`;
@@ -2207,7 +2243,7 @@ function albumsView() {
     ? `<div class="grid">${names.map(a => { const c = cover.get(a) || topItems().find(i => i.albums.includes(a));
         return `<a class="acard" href="${esc(albumHref(a))}"><div class="thumb">${c ? thumbInner(c) : ''}</div><div class="aname">${esc(a)}</div><div class="sub">${plural(ac.get(a), 'item')}</div></a>`; }).join('')}</div>`
     : `<div class="empty"><h2>No albums yet</h2><p>Albums are created the first time you put something in one: while uploading, from Edit on any item, or by selecting items and using “Add to album”.</p></div>`;
-  app.innerHTML = `<div class="wrap">${headHTML('Albums', names.length)}${body}</div>`;
+  app.innerHTML = `<div class="wrap">${headHTML('Albums', names.length)}${libSegHTML('albums')}${body}</div>`;
   loadThumbs(app);
 }
 
@@ -4243,7 +4279,15 @@ const LA = { busy: false, stop: false, done: 0, total: 0, sel: new Set(), seen: 
 const laCandidates = () => topItems().filter(i => i.type !== 'video' && !(i.pages?.length > 1) && i.hasThumb);
 const popcount = x => { x -= x >>> 1 & 0x55555555; x = (x & 0x33333333) + (x >>> 2 & 0x33333333); return Math.imul(x + (x >>> 4) & 0x0f0f0f0f, 0x01010101) >>> 24; };
 async function pictureFingerprint(id) {
-  const url = await thumbURL(id); if (!url) return null;
+  const url = await thumbURL(id);
+  return url ? fingerprintFromURL(url) : null;
+}
+// The same fingerprint straight from a new photo's thumbnail, while it's being added.
+async function fingerprintFromBlob(blob) {
+  const url = URL.createObjectURL(blob);
+  try { return await fingerprintFromURL(url); } finally { URL.revokeObjectURL(url); }
+}
+async function fingerprintFromURL(url) {
   const img = new Image(); img.src = url; await img.decode();
   const c = document.createElement('canvas'); c.width = 9; c.height = 8;
   const g = c.getContext('2d', { willReadFrequently: true });
@@ -4261,24 +4305,125 @@ async function laScan() {
   if (LA.busy) return;
   const todo = laCandidates().filter(i => !i.ph);
   Object.assign(LA, { busy: true, stop: false, done: 0, total: todo.length });
+  try { await laFill(todo, () => { LA.done++; laProgress(); }, () => LA.stop); }
+  finally { LA.busy = false; }
+  if (['lookalike', 'tools'].includes(parseHash().parts[0])) render({ keep: true });
+}
+// Fingerprints these photos, saving every LA_SAVE_EVERY. step() runs after each one; stop() ends it early.
+async function laFill(list, step = () => {}, stop = () => false) {
   let batch = [];
   const flush = async () => { if (batch.length) { const b = batch; batch = []; await dbPutMeta(b).catch(e => console.warn(e)); } };
-  try {
-    for (const it of todo) {
-      if (LA.stop || !S.key) break;
-      try { const h = await pictureFingerprint(it.id); it.ph = h || '-'; } catch { it.ph = '-'; }
-      batch.push(it); LA.done++;
-      if (batch.length >= LA_SAVE_EVERY) await flush();
-      laProgress();
-    }
-    await flush();
-  } finally { LA.busy = false; }
-  if (parseHash().parts[0] === 'lookalike') render({ keep: true });
+  for (const it of list) {
+    if (stop() || !S.key) break;
+    try { const h = await pictureFingerprint(it.id); it.ph = h || '-'; } catch { it.ph = '-'; }
+    batch.push(it); step();
+    if (batch.length >= LA_SAVE_EVERY) await flush();
+  }
+  await flush();
+}
+
+/* ---------- look-alikes while adding photos ---------- */
+// A new photo that looks like one already on the same side is held back, and the person decides.
+const phUsable = h => typeof h === 'string' && h.length === 16 && !/^(0{16}|f{16})$/.test(h);
+const laShape = it => it.width && it.height ? it.width / it.height : 0;
+function laPoolAdd(pool, it) {
+  if (phUsable(it.ph)) pool.push({ it, hi: parseInt(it.ph.slice(0, 8), 16), lo: parseInt(it.ph.slice(8), 16), shape: laShape(it) });
+}
+// The single photos on one side, fingerprinted first where they aren't yet (saved, so it's only slow once).
+async function laPool(sfw, onStep) {
+  const list = S.all.filter(i => isTop(i) && isSfw(i) === sfw && i.type !== 'video' && !isPost(i) && i.hasThumb);
+  const todo = list.filter(i => !i.ph);
+  let done = 0;
+  if (todo.length) await laFill(todo, () => onStep?.(++done, todo.length));
+  const pool = [];
+  list.forEach(it => laPoolAdd(pool, it));
+  return pool;
+}
+// The closest look-alike in the pool for a fingerprint and shape, or null.
+function laMatch(pool, ph, w, h) {
+  if (!phUsable(ph)) return null;
+  const hi = parseInt(ph.slice(0, 8), 16), lo = parseInt(ph.slice(8), 16), shape = laShape({ width: w, height: h });
+  let best = null, bestDiff = LA_DIFF + 1;
+  for (const p of pool) {
+    const diff = popcount(hi ^ p.hi) + popcount(lo ^ p.lo);
+    if (diff >= bestDiff) continue;
+    if (shape && p.shape && Math.abs(shape - p.shape) / Math.max(shape, p.shape) > LA_SHAPE) continue;
+    best = p.it; bestDiff = diff;
+  }
+  return best;
+}
+// Shows each held photo next to the one it looks like. Resolves with the ones to add anyway.
+function lookalikeDialog(held) {
+  return new Promise(res => {
+    const one = held.length === 1, urls = held.map(h => h.thumb ? URL.createObjectURL(h.thumb) : '');
+    let chosen = [];
+    const dims = (w, h) => w && h ? ` · ${w}×${h}` : '';
+    const row = (h, k) => `<div class="lk-row">
+      <figure><img src="${urls[k]}" alt=""><figcaption>New${dims(h.w, h.h)} · ${fmtSize(h.file.size)}</figcaption></figure>
+      <figure><img data-like="${h.like.id}" alt=""><figcaption>In your stash${dims(h.like.width, h.like.height)} · ${fmtSize(h.like.size || 0)}</figcaption></figure>
+      ${one ? '' : `<label class="check-row"><input type="checkbox" data-k="${k}"> Add anyway</label>`}</div>`;
+    const m = modal(`<h3>${one ? 'This photo looks like one you already have' : `${held.length} photos look like ones you already have`}</h3>
+      <p class="summary">Same picture, maybe at another size or quality. ${one ? 'Skip it, or add it anyway.' : 'They’re skipped, unless you tick “Add anyway”.'}</p>
+      <div class="lk-list">${held.map(row).join('')}</div>
+      <div class="foot"><button class="btn" data-close>${one ? 'Skip' : 'Skip them'}</button><button class="btn primary" data-ok${one ? '' : ' disabled'}>${one ? 'Add anyway' : 'Add ticked'}</button></div>`,
+      { onClose: () => { urls.forEach(u => u && URL.revokeObjectURL(u)); res(chosen); } });
+    $$('#toasts > *').forEach(t => t.remove()); // earlier notices would sit over this window's buttons
+    $$('img[data-like]', m.el).forEach(async img => { const u = await thumbURL(img.dataset.like).catch(() => null); if (u) img.src = u; });
+    const boxes = $$('input[data-k]', m.el), ok = $('[data-ok]', m.el);
+    boxes.forEach(b => b.onchange = () => { const n = boxes.filter(x => x.checked).length; ok.disabled = !n; ok.textContent = n ? `Add ${n}` : 'Add ticked'; });
+    ok.onclick = () => { chosen = one ? held.slice() : boxes.filter(b => b.checked).map(b => held[+b.dataset.k]); m.close(); };
+  });
+}
+// "Add anyway" means they're different pictures: the look-alike finder shouldn't pair them later.
+function laRememberDifferent(pairs) {
+  if (!pairs.length) return;
+  const no = laNotSame();
+  pairs.forEach(([a, b]) => no.add(laPair(a, b)));
+  try { localStorage.setItem('stash.notSame', JSON.stringify([...no])); } catch {}
 }
 function laProgress() {
-  const bar = $('.la-scan .progress i'), n = $('#laN');
-  if (bar) bar.style.width = (LA.total ? LA.done / LA.total * 100 : 0).toFixed(1) + '%';
-  if (n) n.textContent = `${LA.done.toLocaleString()} of ${LA.total.toLocaleString()} photos`;
+  const pct = (LA.total ? LA.done / LA.total * 100 : 0).toFixed(1) + '%', of = `${LA.done.toLocaleString()} of ${LA.total.toLocaleString()} photos`;
+  $$('.la-scan .progress i, #tlFpBar i').forEach(b => { b.style.width = pct; });
+  const n = $('#laN'); if (n) n.textContent = of;
+  const t = $('#tlFpTxt'); if (t) t.textContent = `Fingerprinting: ${of}. You can leave this page; it carries on.`;
+}
+
+/* ================= tools page ================= */
+// The last button of the phone's bottom bar: fingerprinting, look-alikes, Recently deleted and backups in one place.
+function toolsView() {
+  const app = $('#app'), all = laCandidates(), todo = all.filter(i => !i.ph).length, del = trashTop().length;
+  const fpText = LA.busy ? `Fingerprinting: ${LA.done.toLocaleString()} of ${LA.total.toLocaleString()} photos. You can leave this page; it carries on.`
+    : !all.length ? 'No photos yet.'
+    : !todo ? `All ${plural(all.length, 'photo')} have one, so spotting look-alikes is quick.`
+    : `${todo.toLocaleString()} of ${plural(all.length, 'photo')} still need one. Stash uses it to spot the same picture at another size; doing it now makes adding photos quicker later.`;
+  const card = (act, icon, title, sub) => `<button type="button" class="tl-card" data-tl="${act}"><span class="tl-ic">${icon}</span><span class="tl-b"><b>${title}</b><span>${sub}</span></span></button>`;
+  app.innerHTML = `<div class="wrap">
+    <div class="lib-head"><h1>Tools</h1></div>
+    <div class="tl-list">
+      <section class="tl-card tl-fp">
+        <div class="tl-row"><span class="tl-ic">${I.find}</span><span class="tl-b"><b>Fingerprint all photos</b><span id="tlFpTxt">${fpText}</span></span></div>
+        <div class="progress" id="tlFpBar"${LA.busy ? '' : ' hidden'}><i style="width:${LA.total ? (LA.done / LA.total * 100).toFixed(1) : 0}%"></i></div>
+        ${LA.busy ? '<button type="button" class="btn" data-tl="fpstop">Stop</button>' : todo ? `<button type="button" class="btn primary" data-tl="fp">Fingerprint ${todo === 1 ? 'it' : `all ${todo.toLocaleString()}`} now</button>` : ''}
+      </section>
+      ${card('lookalike', I.image, 'Find look-alike pictures', 'The same picture saved more than once')}
+      ${card('trash', I.trash, `Recently deleted${del ? ` (${del.toLocaleString()})` : ''}`, `What you delete waits here ${TRASH_DAYS} days, in case you change your mind`)}
+      <div class="tl-sec">Backup</div>
+      ${card('export', I.download, 'Export backup', 'Everything in one file, to keep somewhere safe')}
+      ${card('import', I.upload, 'Import backup', 'Bring back a .stash backup file')}
+      ${card('cbz', I.upload, 'Import CBZ / ZIP', 'Doujinshi and comics from archives')}
+    </div>
+  </div>`;
+  app.querySelector('.tl-list').onclick = e => {
+    const b = e.target.closest('[data-tl]'); if (!b) return;
+    const a = b.dataset.tl;
+    if (a === 'fp') { laScan(); render({ keep: true }); }
+    else if (a === 'fpstop') LA.stop = true;
+    else if (a === 'lookalike') navigate('#/lookalike');
+    else if (a === 'trash') navigate('#/trash');
+    else if (a === 'export') exportLibrary();
+    else if (a === 'import') pickFiles($('#importPick'));
+    else if (a === 'cbz') pickFiles($('#cbzPick'));
+  };
 }
 const laNotSame = () => { try { return new Set(JSON.parse(localStorage.getItem('stash.notSame') || '[]')); } catch { return new Set(); } };
 const laPair = (a, b) => a < b ? a + '|' + b : b + '|' + a;
@@ -4510,10 +4655,22 @@ function startUpload(fileList) {
     $$('button', m.el).forEach(b => b.disabled = true);
     $('#prog', m.el).hidden = false;
     const bar = $('#prog i', m.el), txt = $('#progTxt', m.el);
-    const r = await busy(() => ingest(files, tags, albums, useName, skipDup, (i, n, name, frac = 0) => {
+    const step = (i, n, name, frac = 0) => {
       bar.style.width = ((i + frac) / n * 100) + '%';
       txt.textContent = `Encrypting ${i + 1} of ${n}: ${name}${frac ? ` (${Math.round(frac * 100)}%)` : ''}`;
-    }, { sfw: upSide === 'sfw' }));
+    };
+    const prep = (d, n) => { bar.style.width = (d / n * 100) + '%'; txt.textContent = `Getting ready to spot look-alikes: ${d.toLocaleString()} of ${n.toLocaleString()} photos`; };
+    // Look-alikes are checked along with exact copies; a combined post keeps all its pages.
+    const r = await busy(() => ingest(files, tags, albums, useName, skipDup, step, { sfw: upSide === 'sfw', lookalike: skipDup && !combine, onPrep: prep }));
+    if (r.held.length) {
+      const pick = await lookalikeDialog(r.held);
+      r.likeSkipped = r.held.length - pick.length;
+      if (pick.length) {
+        const r2 = await busy(() => ingest(pick.map(h => h.file), tags, albums, useName, false, step, { sfw: upSide === 'sfw' }));
+        r.ok += r2.ok; r.failed += r2.failed; r.ids.push(...r2.ids); r.kept.push(...r2.kept);
+        laRememberDifferent(r2.addedFiles.map((f, k) => [r2.ids[k], pick.find(h => h.file === f)?.like.id]).filter(p => p[1]));
+      }
+    }
     if (combine && r.ids.length > 1) { const post = await makePost(r.ids); if (post) r.post = post.pages.length; }
     bar.style.width = '100%';
     delete m.ov.dataset.busy; m.close();
@@ -4521,6 +4678,7 @@ function startUpload(fileList) {
     const other = (upSide === 'sfw') !== modeSfw() ? ` to the ${upSide === 'sfw' ? 'SFW' : 'NSFW'} side` : '';
     if (r.post) out.push(`made a ${r.post}-page post${other}`); else if (r.ok) out.push(`added ${plural(r.ok, 'item')}${other}`);
     if (r.dup) out.push(`skipped ${plural(r.dup, 'duplicate')}`);
+    if (r.likeSkipped) out.push(`skipped ${plural(r.likeSkipped, 'look-alike')}`);
     if (r.failed) out.push(`${r.failed} failed`);
     if (out.length) toast(cap(out.join(', ')), 3500);
     if (S.key) render({ keep: true });
@@ -4536,8 +4694,10 @@ async function fingerprint(f) {
 }
 async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = {}) {
   requestPersist();
-  let ok = 0, failed = 0, dup = 0; const base = Date.now(), ids = [], kept = [];
+  let ok = 0, failed = 0, dup = 0; const base = Date.now(), ids = [], kept = [], held = [], addedFiles = [];
   const fps = new Set(S.all.map(i => i.fp).filter(Boolean)), sfw = opts.sfw ?? modeSfw();
+  // opts.lookalike: hold back photos that look like ones already on that side (see lookalikeDialog)
+  const pool = opts.lookalike ? await laPool(sfw, opts.onPrep) : null;
   for (let i = 0; i < files.length; i++) {
     let f = files[i]; onProgress(i, files.length, f.name);
     if (f.load) { try { f = await f.load(); } catch (e) { console.error(e); failed++; continue; } }
@@ -4547,6 +4707,10 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
     const video = isVideoFile(f);
     let info = { thumb: null };
     try { info = video ? await videoInfo(f) : await imageInfo(f); } catch {}
+    let ph = null;
+    if (!video && info.thumb) { try { ph = await fingerprintFromBlob(info.thumb); } catch {} }
+    const like = pool && laMatch(pool, ph, info.w, info.h);
+    if (like) { held.push({ file: f, like, thumb: info.thumb, w: info.w, h: info.h }); continue; }
     let pv = null;
     if (video) { try { pv = await previewFrames(f); } catch {} }
     const meta = {
@@ -4554,7 +4718,7 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
       type: video ? 'video' : 'image', mime: f.type || MIME[extOf(f.name)] || '',
       size: f.size, width: info.w || 0, height: info.h || 0, duration: info.duration || null,
       tags: [...tags], albums: [...albums], fav: false, views: 0, added: base - i, hasThumb: !!info.thumb, hasPv: !!pv, fp,
-      ...(sfw ? { sfw: true } : {}),
+      ...(ph ? { ph } : {}), ...(sfw ? { sfw: true } : {}),
     };
     try {
       const thumbRec = info.thumb ? await sealRec(await info.thumb.arrayBuffer()) : null;
@@ -4564,7 +4728,8 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
       addItem(meta);
       if (info.thumb) S.thumbs.set(meta.id, URL.createObjectURL(info.thumb));
       if (fp) fps.add(fp);
-      ids.push(meta.id); kept.push(f); ok++;
+      if (pool) laPoolAdd(pool, meta); // two look-alikes in the same batch are caught too
+      ids.push(meta.id); kept.push(f); addedFiles.push(f); ok++;
     } catch (e) {
       console.error(e);
       if (isQuota(e)) { toast(`Storage is full. Stopped after ${plural(ok, 'file')}.`, 6000); break; }
@@ -4572,7 +4737,7 @@ async function ingest(files, tags, albums, useName, skipDup, onProgress, opts = 
     }
   }
   changed();
-  return { ok, failed, dup, ids, kept };
+  return { ok, failed, dup, ids, kept, held, addedFiles };
 }
 
 /* ================= backup ================= */
@@ -5732,6 +5897,8 @@ function skip(v, secs, box) {
   r.textContent = secs < 0 ? `« ${-secs}s` : `${secs}s »`;
   box.appendChild(r); setTimeout(() => r.remove(), 700);
 }
+const HOLD_MS = 350, HOLD_RATE = 2, HOLD_SLOP = 12; // press-and-hold: how long, how fast, how far the finger may drift (px)
+const FF_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 6v12l8.5-6zM12.5 6v12L21 12z"/></svg>';
 // Double-tap the left or right side of a video to skip 10 seconds, or the middle for onDouble (the viewer's menu).
 // Also keeps the chosen speed and the A–B loop, and starts at the volume and mute you used last time.
 function enhanceVideo(v, box, { onDouble } = {}) {
@@ -5754,7 +5921,33 @@ function enhanceVideo(v, box, { onDouble } = {}) {
     const f = (x - r.left) / r.width;
     return f < 0.38 ? -1 : f > 0.62 ? 1 : 0;
   };
+  // Press and hold the picture: 2× speed until you let go. Letting go isn't a tap (no pause, no double tap).
+  let holdT = null, held = null, downAt = null, heldAt = 0;
+  const holdEnd = () => {
+    clearTimeout(holdT); holdT = null; downAt = null;
+    if (!held) return;
+    v.playbackRate = held.rate; if (held.paused) v.pause();
+    box.querySelectorAll('.hold-fast').forEach(t => t.remove());
+    held = null; heldAt = Date.now();
+  };
+  v.addEventListener('pointerdown', e => {
+    if (!e.isPrimary || (e.pointerType === 'mouse' && e.button !== 0) || side(e.clientX, e.clientY) === null) return;
+    downAt = { x: e.clientX, y: e.clientY };
+    clearTimeout(holdT);
+    holdT = setTimeout(() => {
+      holdT = null;
+      held = { rate: v.playbackRate || 1, paused: v.paused };
+      v.playbackRate = HOLD_RATE; if (v.paused) v.play().catch(() => {});
+      const tag = document.createElement('div'); tag.className = 'hold-fast'; tag.innerHTML = `${HOLD_RATE}× ${FF_ICON}`; box.appendChild(tag);
+    }, HOLD_MS);
+  });
+  v.addEventListener('pointermove', e => {
+    if (holdT && downAt && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > HOLD_SLOP) { clearTimeout(holdT); holdT = null; }
+  });
+  v.addEventListener('contextmenu', e => e.preventDefault()); // a long press on a phone would open the browser's menu
+  v.addEventListener('click', e => { if (held || Date.now() - heldAt < 400) { e.stopPropagation(); e.preventDefault(); } }, true);
   v.addEventListener('pointerup', e => {
+    if (held) { lastTap = 0; lastSide = 0; return; }
     if (e.pointerType !== 'touch') return;
     const now = Date.now(), sd = side(e.clientX, e.clientY);
     lastTouch = now;
@@ -5762,8 +5955,9 @@ function enhanceVideo(v, box, { onDouble } = {}) {
     if (sd === lastSide && now - lastTap < 350) { if (sd) skip(v, sd * 10, box); else onDouble?.(); lastTap = 0; lastSide = 0; }
     else { lastTap = now; lastSide = sd; }
   });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => v.addEventListener(t, holdEnd));
   v.addEventListener('dblclick', e => {
-    if (Date.now() - lastTouch < 800) { e.preventDefault(); return; }
+    if (Date.now() - lastTouch < 800 || Date.now() - heldAt < 800) { e.preventDefault(); return; }
     const sd = side(e.clientX, e.clientY); if (sd === null) return;
     if (!sd) { if (onDouble) { e.preventDefault(); onDouble(); } return; }
     e.preventDefault(); skip(v, sd * 10, box);
