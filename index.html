@@ -501,11 +501,15 @@ input[type="range"]{accent-color:var(--accent);flex:1;min-width:120px}
 .ipa svg{width:20px;height:20px}
 .ipa span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ipa:hover{filter:brightness(1.15)}
-body:not([data-theme="azure"]) .item-page .tag[data-ns="artist"] .n,body:not([data-theme="azure"]) .ah2 .tag[data-ns="artist"] .n{color:#ff9a9b}
-body:not([data-theme="azure"]) .item-page .tag[data-ns="character"] .n,body:not([data-theme="azure"]) .ah2 .tag[data-ns="character"] .n{color:#7fdc9a}
-body:not([data-theme="azure"]) .item-page .tag[data-ns="series"] .n,body:not([data-theme="azure"]) .item-page .tag[data-ns="parody"] .n,body:not([data-theme="azure"]) .item-page .tag[data-ns="copyright"] .n,body:not([data-theme="azure"]) .ah2 .tag[data-ns="series"] .n{color:#c9a8ff}
-body:not([data-theme="azure"]) .item-page .tag[data-ns="group"] .n{color:#ffc46b}
-body:not([data-theme="azure"]) .item-page .tag[data-ns=""] .n,body:not([data-theme="azure"]) .ah2 .tag[data-ns=""] .n{color:#8cc6ff}
+/* tag colours, everywhere tags are listed: artists blue, characters pink, series yellow, everything else orange */
+.tag[data-ns] .n{color:#ffab5e}
+.tag[data-ns="artist"] .n{color:#7cc4ff}
+.tag[data-ns="character"] .n{color:#ff8fcf}
+.tag[data-ns="series"] .n,.tag[data-ns="parody"] .n,.tag[data-ns="copyright"] .n{color:#ffd84a}
+body[data-theme="azure"] .tag[data-ns] .n{color:#c25a00}
+body[data-theme="azure"] .tag[data-ns="artist"] .n{color:#0a6fc2}
+body[data-theme="azure"] .tag[data-ns="character"] .n{color:#c7307f}
+body[data-theme="azure"] .tag[data-ns="series"] .n,body[data-theme="azure"] .tag[data-ns="parody"] .n,body[data-theme="azure"] .tag[data-ns="copyright"] .n{color:#9a7300}
 @media (max-width:860px){
   body.on-item .topbar{display:none}
   body.on-item main{padding-top:0}
@@ -780,6 +784,8 @@ body.pl-open .overlay{z-index:130}
 .pl-acts .sp{flex:1}
 .pl-n{font-size:13px;color:var(--muted);font-weight:600;margin-right:2px}
 .pl-end{height:1px}
+.pl-list.pl-done .pl-end{height:auto;padding:26px 16px 44px;text-align:center;font-size:13px;font-weight:700;color:var(--muted)}
+.pl-list.pl-done .pl-end::after{content:'That’s all of them'}
 .pl-sheet{position:fixed;color:#fff}
 @media (prefers-reduced-motion:reduce){.pl-acts button.pop svg{animation:none}}
 /* the swipe-up video feed */
@@ -5353,6 +5359,15 @@ const feedOk = it => !!it && it.type === 'video' && !isPost(it) && isTop(it);
 const feedVideos = () => topItems().filter(feedOk).map(i => i.id);
 const feedSlides = () => $$('.fd-slide', feedEl());
 const feedCur = () => feedSlides()[FEED.i] || null;
+// Random order only from the library itself: home (and its tabs), Videos and Photos. From search results, a tag,
+// an artist, an album, Favorites and the like, the feed and the photo list follow that page's list instead: only
+// what's on it, in its order, starting after the one tapped (then the ones before it), and then they end.
+const RANDOM_FROM = new Set(['', 'videos', 'photos']);
+function followList(ok, startId) {
+  if (RANDOM_FROM.has(randomScope)) return null;
+  const k = S.navList.indexOf(startId); if (k < 0) return null;
+  return [...S.navList.slice(k + 1), ...S.navList.slice(0, k)].filter(id => ok(S.byId.get(id)));
+}
 function shuffled(list) {
   const a = list.slice(), r = new Uint32Array(a.length || 1);
   crypto.getRandomValues(r);
@@ -5364,7 +5379,8 @@ function openFeed(startId) {
   if (!S.key || !feedOk(S.byId.get(startId))) return false;
   autoStopAll();
   $$('#app video').forEach(v => { v._save?.(); v.pause(); });
-  Object.assign(FEED, { open: true, ids: [startId], pool: shuffled(feedVideos().filter(id => id !== startId)), i: -1, seen: new Set(), goto: null });
+  const follow = followList(feedOk, startId);
+  Object.assign(FEED, { open: true, ids: [startId], pool: follow || shuffled(feedVideos().filter(id => id !== startId)), follow: !!follow, i: -1, seen: new Set(), goto: null });
   const el = feedEl(), list = $('.fd-list', el);
   list.innerHTML = ''; feedSheet(false);
   el.hidden = false; document.body.classList.add('feed-open');
@@ -5398,6 +5414,7 @@ function feedTeardown() {
 function feedNextId() {
   for (let tries = 0; tries < 2; tries++) {
     while (FEED.pool.length) { const id = FEED.pool.shift(); if (feedOk(S.byId.get(id))) return id; }
+    if (FEED.follow) return null; // following a search or a tag: it ends with the list
     const all = feedVideos(); if (all.length < 2) return null;
     const recent = new Set(FEED.ids.slice(-Math.min(FEED_NO_REPEAT, all.length - 1)));
     FEED.pool = shuffled(all.filter(id => !recent.has(id)));
@@ -5637,9 +5654,10 @@ function openPhotoList(startId) {
   if (!S.key || !plOk(it)) return false;
   autoStopAll();
   $$('#app video').forEach(v => { v._save?.(); v.pause(); });
-  Object.assign(PL, { open: true, ids: [], pool: shuffled(plPhotos().filter(id => id !== startId)), seen: new Set(), goto: null, queue: [] });
+  const follow = followList(plOk, startId);
+  Object.assign(PL, { open: true, ids: [], pool: follow || shuffled(plPhotos().filter(id => id !== startId)), follow: !!follow, seen: new Set(), goto: null, queue: [] });
   const el = plEl(), list = plList();
-  list.innerHTML = '<div class="pl-end" aria-hidden="true"></div>'; plSheet(false);
+  list.innerHTML = '<div class="pl-end" aria-hidden="true"></div>'; list.classList.remove('pl-done'); plSheet(false);
   el.hidden = false; document.body.classList.add('pl-open');
   PL.near = new IntersectionObserver(plNearSeen, { root: list, rootMargin: '150% 0px' });
   PL.far = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) plUnmount(e.target); }), { root: list, rootMargin: '400% 0px' });
@@ -5667,6 +5685,10 @@ function plTeardown(silent = false) {
 // The next photo, picked at random from the ones not shown yet this round, never one of the last few shown
 // (shown = everything in the list plus what's about to be added). When none is left, a new round starts.
 function plNextId(shown) {
+  if (PL.follow) { // following a search or a tag: in its order, and it ends with the list
+    while (PL.pool.length) { const id = PL.pool.shift(); if (plOk(S.byId.get(id))) return id; }
+    return null;
+  }
   const all = plPhotos(); if (all.length < 2) return null;
   const have = new Set(all), recent = new Set(shown.slice(-Math.min(PL_NO_REPEAT, all.length - 1)));
   PL.pool = PL.pool.filter(id => have.has(id));
@@ -5682,6 +5704,7 @@ function plMore() {
   const add = [];
   while (add.length < PL_BATCH) { const id = plNextId([...PL.ids, ...add]); if (!id) break; add.push(id); }
   plAdd(add);
+  if (PL.follow && !PL.pool.length) plList().classList.add('pl-done'); // "That's all" at the bottom
 }
 function plAdd(ids) {
   const list = plList(), end = $('.pl-end', list);
